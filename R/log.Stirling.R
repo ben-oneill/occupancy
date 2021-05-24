@@ -6,7 +6,7 @@
 #' function requires specification of the type of Stirling numbers (first or second kind) and also allows the
 #' user to give a non-centrality parameter for the non-central Stirling numbers.
 #'
-#' @usage \code{log.Stirling(max.n, max.k, type = 'Second', ncp = 0)}
+#' @usage \code{log.Stirling(n, k, type = 'Second', ncp = 0)}
 #' @param n A vector of non-negative integer values
 #' @param k A vector of non-negative integer values
 #' @param type The type of Stirling numbers (\code{First} or \code{Second})
