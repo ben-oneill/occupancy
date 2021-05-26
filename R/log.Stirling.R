@@ -1,20 +1,18 @@
-#' Logarithms of the Stirling numbers
+#' Logarithms of the Stirling numbers of the second kind
 #'
-#' \code{log.Stirling} returns a matrix of the logarithms of the Stirling numbers.
+#' \code{log.Stirling} returns a matrix of the logarithms of the Stirling numbers of the second kind.
 #'
-#' This function computes a matrix of the logarithms of the Stirling numbers of the first or second kind.  The
-#' function requires specification of the type of Stirling numbers (first or second kind) and also allows the
-#' user to give a non-centrality parameter for the non-central Stirling numbers.
+#' This function computes a matrix of the logarithms of the Stirling numbers of the second kind.  The function
+#' allows the user to give a non-centrality parameter for the non-central Stirling numbers.
 #'
-#' @usage \code{log.Stirling(n, k, type = 'Second', ncp = 0)}
+#' @usage \code{log.Stirling(n, k, ncp = 0)}
 #' @param n A vector of non-negative integer values
 #' @param k A vector of non-negative integer values
-#' @param type The type of Stirling numbers (\code{First} or \code{Second})
 #' @param ncp Non-centrality parameter (non-negative numeric value)
 #' @return If all inputs are correctly specified then the output will be a matrix containing the logarithms of
-#' the Stirling numbers of the first or second kind
+#' the Stirling numbers of the second kind
 
-log.Stirling <- function(n, k, type = 'Second', ncp = 0) {
+log.Stirling <- function(n, k, ncp = 0) {
 
   #Check that argument values are single numeric values
   if (!is.numeric(n))                        stop('Error: Argument n is not numeric')
@@ -37,57 +35,30 @@ log.Stirling <- function(n, k, type = 'Second', ncp = 0) {
   n <- max(N)
   k <- max(K)
 
-  #Check the type
-  type <- as.character(type)
-  if (length(type) != 1)                     stop('Error: Type should be \'First\' or \'Second\'')
-  TYPE1 <- c('First',  'first',  '1')
-  TYPE2 <- c('Second', 'second', '2')
-  if (!(type %in% c(TYPE1, TYPE2)))          stop('Error: Type should be \'First\' or \'Second\'')
-
   #Set log-Stirling matrix
   LOGSTIRLING <- matrix(-Inf, nrow = n+1, ncol = k+1)
   rownames(LOGSTIRLING) <- sprintf('n[%s]', 0:n)
   colnames(LOGSTIRLING) <- sprintf('k[%s]', 0:k)
 
-  #Extract/compute Stirling numbers of the first kind
-  if (type %in% TYPE1) {
+  #Compute Stirling numbers of the second kind
+  #Generate base log-Stirling numbers
+  LOGSTIRLING[1,1] <- 0
+  if ((ncp > 0)&(n > 0)) {
+  for (nn in 1:n) {
+    LOGSTIRLING[nn+1, 1] <- nn*log(ncp) } }
 
-    #Generate base log-Stirling numbers
-    LOGSTIRLING[1,1] <- 0
+  #Generate log-Stirling numbers via recursion
+  LOGSTIRLING[1,1] <- 0
+  for (nn in 1:n) {
+  for (kk in 1:min(k,nn)) {
+    T1 <- log(kk + ncp) + LOGSTIRLING[nn, kk+1]
+    T2 <- LOGSTIRLING[nn, kk]
+    LOGSTIRLING[nn+1, kk+1] <- matrixStats::logSumExp(c(T1, T2)) } }
 
-    #Generate log-Stirling numbers via recursion
-    for (nn in 1:n) {
-    for (kk in 1:min(k,nn)) {
-      T1 <- log(nn-1) + LOGSTIRLING[nn, kk+1]
-      T2 <- LOGSTIRLING[nn, kk]
-      LOGSTIRLING[nn+1, kk+1] <- matrixStats::logSumExp(c(T1, T2)) } }
-
-    #Set output
-    OUT <- LOGSTIRLING[N+1, K+1, drop = FALSE]
-    attr(OUT, 'Type') <- 'Log-Stirling numbers of the first kind'
-    attr(OUT, 'ncp')  <- ncp }
-
-  #Extract/compute Stirling numbers of the second kind
-  if (type %in% TYPE2) {
-
-    #Generate base log-Stirling numbers
-    LOGSTIRLING[1,1] <- 0
-    if ((ncp > 0)&(n > 0)) {
-    for (nn in 1:n) {
-      LOGSTIRLING[nn+1, 1] <- nn*log(ncp) } }
-
-    #Generate log-Stirling numbers via recursion
-    LOGSTIRLING[1,1] <- 0
-    for (nn in 1:n) {
-    for (kk in 1:min(k,nn)) {
-      T1 <- log(kk + ncp) + LOGSTIRLING[nn, kk+1]
-      T2 <- LOGSTIRLING[nn, kk]
-      LOGSTIRLING[nn+1, kk+1] <- matrixStats::logSumExp(c(T1, T2)) } }
-
-    #Set output
-    OUT <- LOGSTIRLING[N+1, K+1, drop = FALSE]
-    attr(OUT, 'Type') <- 'Log-Stirling numbers of the second kind'
-    attr(OUT, 'ncp')  <- ncp }
+  #Set output
+  OUT <- LOGSTIRLING[N+1, K+1, drop = FALSE]
+  attr(OUT, 'Description') <- 'Log-Stirling numbers of the second kind'
+  attr(OUT, 'Non-centrality parameter')  <- ncp
 
   #Return output
   OUT }
