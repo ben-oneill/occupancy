@@ -17,7 +17,7 @@
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range and arguments are integers)
 #' then the output will be a matrix of probabilities/log-probabilities
 
-dnegocc.all <- function(max.x, space = 1, max.occupancy = space, prob = 1, approx = FALSE, log = FALSE) {
+dnegocc.all <- function(max.x, space, max.occupancy, prob = 1, approx = FALSE, log = FALSE) {
 
   #Check that argument and parameters are appropriate type
   if (!is.numeric(max.x))                    stop('Error: Argument max.x is not numeric')

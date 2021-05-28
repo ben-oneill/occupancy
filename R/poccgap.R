@@ -25,7 +25,7 @@
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output
 #' will be a vector of probabilities/log-probabilities corresponding to the vector argument x
 
-poccgap <- function(x, size = 1, space = NULL, occupancy = size, prob = NULL, scale = NULL, log.p = FALSE, lower.tail = TRUE) {
+poccgap <- function(x, size, space = NULL, occupancy = size, prob = NULL, scale = NULL, log.p = FALSE, lower.tail = TRUE) {
 
   #Check scale parameter
   if (!is.null(scale)) {
@@ -80,12 +80,20 @@ poccgap <- function(x, size = 1, space = NULL, occupancy = size, prob = NULL, sc
 
   #Check that parameters are in allowable range
   if (size != n)                             stop('Error: Size parameter is not an integer')
-  if (n <= 0)                                stop('Error: Size parameter must be positive')
+  if (n < 0)                                 stop('Error: Size parameter must be non-negative')
   if (occupancy != k)                        stop('Error: Occupancy parameter is not an integer')
   if (k < 0)                                 stop('Error: Occupancy parameter is must be non-negative')
   if (k > n)                                 stop('Error: Occupancy parameter is larger than size parameter')
   if (!is.null(space)) {
     if (k > m)                               stop('Error: Occupancy parameter is larger than space parameter') }
+
+  #Deal with trivial case where n = 0
+  if (n == 0) {
+    OUT <- rep(-Inf, length(x))
+    IND <- (x >= 0)
+    OUT[IND] <- 0
+    if (!lower.tail) { OUT <- VGAM::log1mexp(-OUT) }
+    if (log) { return(OUT) } else { return(exp(OUT)) } }
 
   #Create output vector
   CUMOCCGAP <- rep(-Inf, length(x))

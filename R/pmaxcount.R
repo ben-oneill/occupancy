@@ -25,37 +25,45 @@
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output will be a
 #' vector of probabilities/log-probabilities corresponding to the vector argument q
 
-pmaxcount <- function(q, size = 1, space = 1, prob = 1, log.p = FALSE, lower.tail = TRUE) {
+pmaxcount <- function(q, size, space, prob = 1, log.p = FALSE, lower.tail = TRUE) {
 
   #Check that argument and parameters are appropriate type
-  if (!is.numeric(q))           stop('Error: Argument q is not numeric')
-  if (!is.numeric(size))        stop('Error: Size parameter is not numeric')
-  if (!is.numeric(space))       stop('Error: Space parameter is not numeric')
-  if (!is.numeric(prob))        stop('Error: Probability parameter is not numeric')
-  if (!is.logical(log.p))       stop('Error: log.p option is not a logical value')
-  if (!is.logical(lower.tail))  stop('Error: lower.tail option is not a logical value')
+  if (!is.numeric(q))                       stop('Error: Argument q is not numeric')
+  if (!is.numeric(size))                    stop('Error: Size parameter is not numeric')
+  if (!is.numeric(space))                   stop('Error: Space parameter is not numeric')
+  if (!is.numeric(prob))                    stop('Error: Probability parameter is not numeric')
+  if (!is.logical(log.p))                   stop('Error: log.p option is not a logical value')
+  if (!is.logical(lower.tail))              stop('Error: lower.tail option is not a logical value')
 
   #Check that parameters are atomic
-  if (length(size)  != 1)       stop('Error: Size parameter should be a single number')
-  if (length(space) != 1)       stop('Error: Space parameter should be a single number')
-  if (length(prob)  != 1)       stop('Error: Probability parameter should be a single number')
-  if (length(log.p) != 1)       stop('Error: log.p option should be a single logical value')
-  if (length(lower.tail) != 1)  stop('Error: lower.tail option should be a single logical value')
+  if (length(size)  != 1)                   stop('Error: Size parameter should be a single number')
+  if (length(space) != 1)                   stop('Error: Space parameter should be a single number')
+  if (length(prob)  != 1)                   stop('Error: Probability parameter should be a single number')
+  if (length(log.p) != 1)                   stop('Error: log.p option should be a single logical value')
+  if (length(lower.tail) != 1)              stop('Error: lower.tail option should be a single logical value')
 
   #Set parameters
   n <- as.integer(size)
   m <- as.integer(space)
 
   #Check that parameters are in allowable range
-  if (size != n)                stop('Error: Size parameter is not an integer')
-  if (n <= 0)                   stop('Error: Size parameter is negative')
-  if (space != m)               stop('Error: Space parameter is not an integer')
-  if (m <= 0)                   stop('Error: Space parameter is negative')
-  if ((prob < 0)|(prob > 1))    stop('Error: Probability parameter is not between zero and one')
+  if (size != n)                            stop('Error: Size parameter is not an integer')
+  if (n < 0)                                stop('Error: Size parameter should be non-negative')
+  if (space != m)                           stop('Error: Space parameter is not an integer')
+  if (m <= 0)                               stop('Error: Space parameter should be positive')
+  if ((prob < 0)|(prob > 1))                stop('Error: Probability parameter is not between zero and one')
 
   ################################################################################################################
   #########  Compute the cumulative log-probabilities via iterative method in Bonetti and Corillo (2019)  ########
   ################################################################################################################
+
+  #Deal with trivial case where n = 0
+  if (n == 0) {
+    OUT <- rep(-Inf, length(x))
+    IND <- (x >= 0)
+    OUT[IND] <- 0
+    if (!lower.tail) { OUT <- VGAM::log1mexp(-OUT) }
+    if (log.p) { return(OUT) } else { return(exp(OUT)) } }
 
   #Create matrix of log-probabilities
   MAX <- min(floor(max(q)), n)

@@ -58,7 +58,7 @@ log.Stirling <- function(n, k, ncp = 0) {
   #Set output
   OUT <- LOGSTIRLING[N+1, K+1, drop = FALSE]
   attr(OUT, 'Description') <- 'Log-Stirling numbers of the second kind'
-  attr(OUT, 'Non-centrality parameter')  <- ncp
+  attr(OUT, 'ncp') <- ncp
 
   #Return output
   OUT }

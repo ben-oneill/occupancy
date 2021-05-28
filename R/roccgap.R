@@ -22,7 +22,7 @@
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output will be a
 #' vector of random values of length \code{n}
 
-roccgap <- function(n, size = 1, space = NULL, occupancy = size, prob = NULL, scale = NULL) {
+roccgap <- function(n, size, space = NULL, occupancy = size, prob = NULL, scale = NULL) {
 
   #Check scale parameter
   if (!is.null(scale)) {
@@ -85,6 +85,11 @@ roccgap <- function(n, size = 1, space = NULL, occupancy = size, prob = NULL, sc
   if (k > n)                                 stop('Error: Occupancy parameter is larger than size parameter')
   if (!is.null(space)) {
     if (k > m)                               stop('Error: Occupancy parameter is larger than space parameter') }
+
+  #Deal with trivial case where n = 0
+  if (n == 0) {
+    OUT <- rep(0, OUT.LENGTH)
+    if (log) { return(OUT) } else { return(exp(OUT)) } }
 
   #Compute for trivial case where scale = 0
   if (scale == 0) {

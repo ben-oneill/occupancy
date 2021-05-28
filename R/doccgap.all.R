@@ -22,7 +22,7 @@
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output
 #' will be a matrix of probabilities/log-probabilities
 
-doccgap.all <- function(size = 1, space = NULL, max.occupancy = size, prob = NULL, scale = NULL, log = FALSE) {
+doccgap.all <- function(size, space = NULL, max.occupancy = size, prob = NULL, scale = NULL, log = FALSE) {
 
   #Check scale parameter
   if (!is.null(scale)) {
@@ -59,27 +59,34 @@ doccgap.all <- function(size = 1, space = NULL, max.occupancy = size, prob = NUL
     scale <- m*(1-prob)/prob }
 
   #Check that argument and parameters are appropriate type
-  if (!is.numeric(size))                     stop('Error: Size parameter is not numeric')
-  if (!is.numeric(max.occupancy))            stop('Error: Maximum occupancy parameter is not numeric')
-  if (!is.logical(log))                      stop('Error: log option is not a logical value')
+  if (!is.numeric(size))                       stop('Error: Size parameter is not numeric')
+  if (!is.numeric(max.occupancy))              stop('Error: Maximum occupancy parameter is not numeric')
+  if (!is.logical(log))                        stop('Error: log option is not a logical value')
 
   #Check that parameters are atomic
-  if (length(size)  != 1)                    stop('Error: Size parameter should be a single number')
-  if (length(max.occupancy) != 1)            stop('Error: Maximum occupancy parameter should be a single number')
-  if (length(log) != 1)                      stop('Error: log option should be a single logical value')
+  if (length(size)  != 1)                      stop('Error: Size parameter should be a single number')
+  if (length(max.occupancy) != 1)              stop('Error: Maximum occupancy parameter should be a single number')
+  if (length(log) != 1)                        stop('Error: log option should be a single logical value')
 
   #Set parameters
   n  <- as.integer(size)
   k  <- as.integer(max.occupancy)
 
   #Check that parameters are in allowable range
-  if (size != n)                             stop('Error: Size parameter is not an integer')
-  if (n <= 0)                                stop('Error: Size parameter must be positive')
-  if (max.occupancy != k)                    stop('Error: Maximum occupancy parameter is not an integer')
-  if (k < 0)                                 stop('Error: Maximum occupancy parameter is must be non-negative')
-  if (k > n)                                 stop('Error: Maximum occupancy parameter is larger than size parameter')
+  if (size != n)                               stop('Error: Size parameter is not an integer')
+  if (n < 0)                                   stop('Error: Size parameter must be non-negative')
+  if (max.occupancy != k)                      stop('Error: Maximum occupancy parameter is not an integer')
+  if (k < 0)                                   stop('Error: Maximum occupancy parameter must be non-negative')
+  if (k > n)                                   stop('Error: Maximum occupancy parameter is larger than size parameter')
   if (!is.null(space)) {
-    if (k > m)                               stop('Error: Maximum occupancy parameter is larger than space parameter') }
+    if (k > m)                                 stop('Error: Maximum occupancy parameter is larger than space parameter') }
+
+  #Deal with trival case where n = 0
+  if (n == 0) {
+    OCCGAP <- matrix(0, nrow = 1, ncol = 1)
+    rownames(OCCGAP) <- 'r[0]'
+    colnames(OCCGAP) <- 'k[0]'
+    if (log) { return(OCCGAP) } else { return(exp(OCCGAP)) } }
 
   #Create output vector
   OCCGAP <- matrix(-Inf, nrow = n+1, ncol = k+1)

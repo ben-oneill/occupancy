@@ -13,7 +13,7 @@
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output will be a
 #' vector of random values of length \code{n}
 
-rnegocc <- function(n, space = 1, occupancy = space, prob = 1) {
+rnegocc <- function(n, space, occupancy, prob = 1) {
 
   #Check that argument and parameters are appropriate type
   if (!is.numeric(n))                        stop('Error: Argument n is not numeric')

@@ -25,7 +25,7 @@
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output
 #' will be a vector of probabilities/log-probabilities corresponding to the vector argument x
 
-qoccgap <- function(p, size = 1, space = NULL, occupancy = size, prob = NULL, scale = NULL, log.p = FALSE, lower.tail = TRUE) {
+qoccgap <- function(p, size, space = NULL, occupancy = size, prob = NULL, scale = NULL, log.p = FALSE, lower.tail = TRUE) {
 
   #Check scale parameter
   if (!is.null(scale)) {

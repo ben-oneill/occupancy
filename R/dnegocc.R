@@ -17,7 +17,7 @@
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range and arguments are integers)
 #' then the output will be a vector of probabilities/log-probabilities corresponding to the vector argument x
 
-dnegocc <- function(x, space = 1, occupancy = space, prob = 1, approx = FALSE, log = FALSE) {
+dnegocc <- function(x, space, occupancy, prob = 1, approx = FALSE, log = FALSE) {
 
   #Check that argument and parameters are appropriate type
   if (!is.numeric(x))                        stop('Error: Argument x is not numeric')
@@ -75,15 +75,12 @@ dnegocc <- function(x, space = 1, occupancy = space, prob = 1, approx = FALSE, l
   #Compute log-probablities using recursion
   if (!approx) {
 
-    #Create matrix for recursion
-    LOGS   <- rep(-Inf, max.x+1)
-
-    #Compute first column of matrix
+    #Create base vector for recursion
     if(prob == 1) {
       LOGS <- c(0, rep(-Inf, max.x)) } else {
       LOGS <- log(prob) + (0:max.x)*log(1-prob) }
 
-    #Compute remaining rows via recursion
+    #Update via recursion
     r <- 2
     while (r <= k) {
       NEWLOGS <- rep(-Inf, max.x+1)

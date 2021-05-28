@@ -21,7 +21,7 @@
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range and arguments are integers)
 #' then the output will be a vector of probabilities/log-probabilities corresponding to the vector argument p
 
-qnegocc <- function(p, space = 1, occupancy = space, prob = 1, approx = FALSE, log.p = FALSE, lower.tail = TRUE) {
+qnegocc <- function(p, space, occupancy, prob = 1, approx = FALSE, log.p = FALSE, lower.tail = TRUE) {
 
   #Check that argument and parameters are appropriate type
   if (!is.numeric(p))                        stop('Error: Argument p is not numeric')
