@@ -12,7 +12,6 @@
 #' The function allows either parameterisation (i.e., the user can either specify the \code{scale} paramater or
 #' both the \code{space} and \code{prob} paramaters).
 #'
-#' @usage \code{doccgap.all(size, space, max.occupancy, prob, scale, log = FALSE)}
 #' @param size The size parameter for the occupancy-gap distribution (number of balls)
 #' @param space The space parameter for the occupancy-gap distribution (number of bins)
 #' @param max.occupancy The maximum occupancy parameter for the occupancy-gap distribution (number of occupied bins)

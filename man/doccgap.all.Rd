@@ -19,7 +19,14 @@ doccgap(
   log = FALSE
 )
 
-\code{doccgap.all(size, space, max.occupancy, prob, scale, log = FALSE)}
+doccgap.all(
+  size,
+  space = NULL,
+  max.occupancy = size,
+  prob = NULL,
+  scale = NULL,
+  log = FALSE
+)
 
 poccgap(
   x,

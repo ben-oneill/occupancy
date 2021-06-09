@@ -9,7 +9,6 @@
 #' the bin-counts, effective sample-size, occupancy number, max-count number, and hitting times for each possible
 #' occupancy number.  Each of these objects has a custom printing and plot methods to give user-friendly output.
 #'
-#' @usage \code{sample.ballbin(n, size, space, prob)}
 #' @param n The number of simulations of the process
 #' @param size The size parameter for the occupancy distribution (number of balls)
 #' @param space The space pararmeter for the occupancy distribution (number of bins)

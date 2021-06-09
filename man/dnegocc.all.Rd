@@ -11,7 +11,7 @@
 \usage{
 dnegocc(x, space, occupancy, prob = 1, approx = FALSE, log = FALSE)
 
-\code{dnegocc.all(max.x, space, occupancy, prob, approx = FALSE, log = FALSE)}
+dnegocc.all(max.x, space, max.occupancy, prob = 1, approx = FALSE, log = FALSE)
 
 pnegocc(
   x,

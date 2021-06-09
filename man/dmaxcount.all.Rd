@@ -11,7 +11,7 @@
 \usage{
 dmaxcount(x, size, space, prob = 1, log = FALSE)
 
-\code{dmaxcount.all(max.x, max.size, space, prob, log = FALSE)}
+dmaxcount.all(max.x, max.size, space, prob = 1, log = FALSE)
 
 pmaxcount(q, size, space, prob = 1, log.p = FALSE, lower.tail = TRUE)
 

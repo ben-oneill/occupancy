@@ -7,7 +7,6 @@
 #'
 #' O'Neill, B. (2021) An examination of the negative-occupancy distribution and the coupon-collector distribution.
 #'
-#' @usage \code{dnegocc.all(max.x, space, occupancy, prob, approx = FALSE, log = FALSE)}
 #' @param max.x A vector of numeric values to be used as arguments for the mass function
 #' @param space The space parameter for the negative occupancy distribution (number of bins)
 #' @param max.occupancy The maximum occupancy parameter for the negative occupancy distribution (number of occupied bins)

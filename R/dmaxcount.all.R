@@ -13,7 +13,6 @@
 #' Rappeport, M,A. (1968) Algorithms and computational procedures for the application of order statistics to queuing
 #' problems. PhD thesis, New York University.
 #'
-#' @usage \code{dmaxcount.all(max.x, max.size, space, prob, log = FALSE)}
 #' @param max.x A vector of numeric values to be used as arguments for the probability mass function
 #' @param max.size The maximum size parameter for the maximum-count distribution (number of balls)
 #' @param space The space parameter for the maximum-count distribution (number of bins)

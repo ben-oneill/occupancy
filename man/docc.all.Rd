@@ -11,7 +11,7 @@
 \usage{
 docc(x, size, space, prob = 1, approx = FALSE, log = FALSE)
 
-\code{docc.all(max.size, space, prob, approx = FALSE, log = FALSE)}
+docc.all(max.size, space, prob = 1, approx = FALSE, log = FALSE)
 
 pocc(
   x,

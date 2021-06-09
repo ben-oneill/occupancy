@@ -5,7 +5,6 @@
 #' This function computes a matrix of the logarithms of the Stirling numbers of the second kind.  The function
 #' allows the user to give a non-centrality parameter for the non-central Stirling numbers.
 #'
-#' @usage \code{log.Stirling(n, k, ncp = 0)}
 #' @param n A vector of non-negative integer values
 #' @param k A vector of non-negative integer values
 #' @param ncp Non-centrality parameter (non-negative numeric value)

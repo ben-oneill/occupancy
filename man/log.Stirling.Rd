@@ -4,7 +4,7 @@
 \alias{log.Stirling}
 \title{Logarithms of the Stirling numbers of the second kind}
 \usage{
-\code{log.Stirling(n, k, ncp = 0)}
+\method{log}{Stirling}(n, k, ncp = 0)
 }
 \arguments{
 \item{n}{A vector of non-negative integer values}

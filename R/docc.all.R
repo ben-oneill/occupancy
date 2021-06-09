@@ -7,7 +7,6 @@
 #'
 #' O'Neill, B. (2021) Three distributions in the extended occupancy problem.
 #'
-#' @usage \code{docc.all(max.size, space, prob, approx = FALSE, log = FALSE)}
 #' @param max.size The maximum size parameter for the occupancy distribution (number of balls)
 #' @param space The space pararmeter for the occupancy distribution (number of bins)
 #' @param prob The probability parameter for the occupancy distribution (probability of ball occupying its bin)

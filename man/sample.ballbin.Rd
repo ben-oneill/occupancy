@@ -4,7 +4,7 @@
 \alias{sample.ballbin}
 \title{Generates simulations from the extended balls-in-bins process}
 \usage{
-\code{sample.ballbin(n, size, space, prob)}
+sample.ballbin(n, size, space, prob, alloc.prob = NULL)
 }
 \arguments{
 \item{n}{The number of simulations of the process}

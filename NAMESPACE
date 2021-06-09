@@ -1,1 +1,5 @@
 exportPattern("^[[:alpha:]]+")
+importFrom("grDevices", "colours")
+importFrom("stats", "dbinom", "dnbinom", "dnorm", "na.omit", "pbinom",
+             "pgamma", "pnbinom", "qbinom", "qnbinom", "rexp", "rgeom",
+             "runif")
