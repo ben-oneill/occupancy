@@ -1,18 +1,4 @@
-#' Random generation from the negative occupancy distribution
-#'
-#' \code{rnegocc} returns random values from the distribution.
-#'
-#' This function generates random values from the negative occupancy distribution, which is the distribution for
-#' the excess hitting time in the extended occupancy problem.
-#'
-#' @usage \code{rnegocc(n, space, occupancy, prob)}
-#' @param n The number of random values to generate
-#' @param space The space parameter for the negative occupancy distribution (number of bins)
-#' @param occupancy The occupancy parameter for the negative occupancy distribution (number of occupied bins)
-#' @param prob The probability parameter for the negative occupancy distribution (probability of ball occupying its bin)
-#' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output will be a
-#' vector of random values of length \code{n}
-
+#' @rdname dnegocc.all
 rnegocc <- function(n, space, occupancy, prob = 1) {
 
   #Check that argument and parameters are appropriate type

@@ -1,24 +1,4 @@
-#' Cumulative distribution function of the extended occupancy distribution
-#'
-#' \code{pocc} returns the probability or log-probability values for the arguments.
-#'
-#' This function computes probabilities or log-probabilities from the cumulative distribution function of the
-#' extended occupancy distribution.  Further details on the distribution can be found in the following paper:
-#'
-#' O'Neill, B. (2021) Three distributions in the extended occupancy problem.
-#'
-#' @usage \code{pocc(x, size, space, prob, approx = FALSE, log.p = FALSE, lower.tail = TRUE)}
-#' @param x A vector of numeric values to be used as arguments for the mass function
-#' @param size The size parameter for the occupancy distribution (number of balls)
-#' @param space The space pararmeter for the occupancy distribution (number of bins)
-#' @param prob The probability parameter for the occupancy distribution (probability of ball occupying its bin)
-#' @param approx A logical value specifying whether to use an approximation to the distribution
-#' @param log.p A logical value specifying whether results should be returned as log-probabilities
-#' @param lower.tail A logical value specifying whether results are from the cumulative distribution function
-#' or the corresponding survival function
-#' @return If all inputs are correctly specified (i.e., parameters are in allowable range and arguments are integers)
-#' then the output will be a vector of probabilities/log-probabilities corresponding to the vector argument x
-
+#' @rdname docc.all
 pocc <- function(x, size, space, prob = 1, approx = FALSE, log.p = FALSE, lower.tail = TRUE) {
 
   #Check that argument and parameters are appropriate type

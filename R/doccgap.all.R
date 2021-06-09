@@ -7,7 +7,7 @@
 #'
 #' O'Neill, B. (XXXX) An examination of the occupancy-gap distribution.
 #'
-#' Note: The distribution is parameterised by a \code{scale} paramater, but in applied problems in the context
+#' Note: The distribution is parameterised by a \code{scale} parameter, but in applied problems in the context
 #' of the extended occupancy problem this parameter is a function of \code{space} and \code{prob} parameters.
 #' The function allows either parameterisation (i.e., the user can either specify the \code{scale} paramater or
 #' both the \code{space} and \code{prob} paramaters).
