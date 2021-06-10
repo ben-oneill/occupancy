@@ -85,19 +85,19 @@ sample.ballbin <- function(n, size, space, prob, alloc.prob = NULL) {
   #Return output
   OUT }
 
-
-print.ballbin <- function(object) {
+#' @describeIn sample.ballbin prints the sample
+print.ballbin <- function(x, ...) {
 
   #Check input class
-  if (!('ballbin' %in% class(object)))      stop('Error: This print method is for \'ballbin\' objects')
+  if (!('ballbin' %in% class(x)))      stop('Error: This print method is for \'ballbin\' objects')
 
   #Extract information
-  PARS       <- object$parameters
+  PARS       <- x$parameters
   n          <- PARS$size
   m          <- PARS$space
   prob       <- PARS$prob
   alloc.prob <- PARS$alloc.prob
-  SAMPLE     <- object$sample
+  SAMPLE     <- x$sample
   obs        <- nrow(SAMPLE)
 
   #Print heading
@@ -119,11 +119,11 @@ print.ballbin <- function(object) {
   print(SAMPLE)
   cat('\n')}
 
-
-plot.ballbin <- function(object, ball.size = NULL, ball.color = NULL, ball.colour = ball.color, max.plots = 30) {
+#' @describeIn sample.ballbin plots the sample
+plot.ballbin <- function(x, ..., ball.size = NULL, ball.color = NULL, ball.colour = ball.color, max.plots = 30) {
 
   #Check inputs
-  if (!('ballbin' %in% class(object)))            stop('Error: This plot method is for \'ballbin\' objects')
+  if (!('ballbin' %in% class(x)))            stop('Error: This plot method is for \'ballbin\' objects')
   if (!is.null(ball.size)) {
     if (!is.numeric(ball.size))                   stop('Error: ball.size must be a positive number')
     if (length(ball.size) != 1)                   stop('Error: ball.size must be a single positive number')
@@ -140,13 +140,13 @@ plot.ballbin <- function(object, ball.size = NULL, ball.color = NULL, ball.colou
   if (max.plots != MAX.PLOTS)                     stop('Error: max.plots must be a positive integer')
 
   #Extract information
-  PARS       <- object$parameters
+  PARS       <- x$parameters
   n          <- PARS$size
   m          <- PARS$space
   prob       <- PARS$prob
   alloc.prob <- PARS$alloc.prob
-  ALLOC      <- object$allocation
-  SAMPLE     <- object$sample
+  ALLOC      <- x$allocation
+  SAMPLE     <- x$sample
   obs        <- nrow(SAMPLE)
 
   #Limit plot size to 100 plots
@@ -229,8 +229,8 @@ plot.ballbin <- function(object, ball.size = NULL, ball.color = NULL, ball.colou
   #Print the plot
   plot(PLOT) }
 
-
-summary.ballbin <- function(object) {
+#' @describeIn sample.ballbin summarizes the sample
+summary.ballbin <- function(object, ...) {
 
   #Check input class
   if (!('ballbin' %in% class(object)))      stop('Error: This summary method is for \'ballbin\' objects')
@@ -290,23 +290,23 @@ summary.ballbin <- function(object) {
   #Return output
   OUT }
 
-
-print.summary.ballbin <- function(object) {
+#' @describeIn sample.ballbin prints the summary
+print.summary.ballbin <- function(x, ...) {
 
   #Check input class
-  if (!('summary.ballbin' %in% class(object)))      stop('Error: This print method is for \'summary.ballbin\' objects')
+  if (!('summary.ballbin' %in% class(x)))      stop('Error: This print method is for \'summary.ballbin\' objects')
 
   #Extract information
-  PARS       <- object$parameters
+  PARS       <- x$parameters
   n          <- PARS$size
   m          <- PARS$space
   prob       <- PARS$prob
   alloc.prob <- PARS$alloc.prob
-  COUNTS     <- object$counts
-  EFF.SIZE   <- as.matrix(object$eff.size,  ncol = 1, drop = FALSE)
-  OCCUPANCY  <- as.matrix(object$occupancy, ncol = 1, drop = FALSE)
-  MAXCOUNT   <- as.matrix(object$max.count, ncol = 1, drop = FALSE)
-  HITTING    <- object$excess.hitting
+  COUNTS     <- x$counts
+  EFF.SIZE   <- as.matrix(x$eff.size,  ncol = 1, drop = FALSE)
+  OCCUPANCY  <- as.matrix(x$occupancy, ncol = 1, drop = FALSE)
+  MAXCOUNT   <- as.matrix(x$max.count, ncol = 1, drop = FALSE)
+  HITTING    <- x$excess.hitting
   colnames(EFF.SIZE)  <- 'Eff.Size'
   colnames(OCCUPANCY) <- 'Occupancy'
   colnames(MAXCOUNT)  <- 'MaxCount'
@@ -354,11 +354,11 @@ print.summary.ballbin <- function(object) {
   if (sum(is.na(HITTING)) > 0) {
     cat('(Values ending in + are right-censored values.) \n \n') } }
 
-
-plot.summary.ballbin <- function(object, bar.color = NULL, bar.colour = bar.color) {
+#' @describeIn sample.ballbin plots the summary
+plot.summary.ballbin <- function(x, ..., bar.color = NULL, bar.colour = bar.color) {
 
   #Check inputs
-  if (!('summary.ballbin' %in% class(object)))              stop('Error: This plot method is for \'summary.ballbin\' objects')
+  if (!('summary.ballbin' %in% class(x)))              stop('Error: This plot method is for \'summary.ballbin\' objects')
   if ((!missing(bar.color))&(!missing(bar.colour))) {
     stop('Error: Specify bar.color or bar.colour but not both') }
   if (!is.null(bar.colour)) {
@@ -367,16 +367,16 @@ plot.summary.ballbin <- function(object, bar.color = NULL, bar.colour = bar.colo
     if (!(bar.colour %in% colours()))                       stop('Error: bar.color must be in \'colours()\'') }
 
   #Extract information
-  PARS       <- object$parameters
+  PARS       <- x$parameters
   n          <- PARS$size
   m          <- PARS$space
   prob       <- PARS$prob
   alloc.prob <- PARS$alloc.prob
-  COUNTS     <- object$counts
-  EFF.SIZE   <- as.matrix(object$eff.size,  ncol = 1, drop = FALSE)
-  OCCUPANCY  <- as.matrix(object$occupancy, ncol = 1, drop = FALSE)
-  MAXCOUNT   <- as.matrix(object$max.count, ncol = 1, drop = FALSE)
-  HITTING    <- object$excess.hitting
+  COUNTS     <- x$counts
+  EFF.SIZE   <- as.matrix(x$eff.size,  ncol = 1, drop = FALSE)
+  OCCUPANCY  <- as.matrix(x$occupancy, ncol = 1, drop = FALSE)
+  MAXCOUNT   <- as.matrix(x$max.count, ncol = 1, drop = FALSE)
+  HITTING    <- x$excess.hitting
   colnames(EFF.SIZE)  <- 'Eff.Size'
   colnames(OCCUPANCY) <- 'Occupancy'
   colnames(MAXCOUNT)  <- 'MaxCount'

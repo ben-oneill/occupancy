@@ -2,9 +2,31 @@
 % Please edit documentation in R/sample.ballbin.R
 \name{sample.ballbin}
 \alias{sample.ballbin}
+\alias{print.ballbin}
+\alias{plot.ballbin}
+\alias{summary.ballbin}
+\alias{print.summary.ballbin}
+\alias{plot.summary.ballbin}
 \title{Generates simulations from the extended balls-in-bins process}
 \usage{
 sample.ballbin(n, size, space, prob, alloc.prob = NULL)
+
+\method{print}{ballbin}(x, ...)
+
+\method{plot}{ballbin}(
+  x,
+  ...,
+  ball.size = NULL,
+  ball.color = NULL,
+  ball.colour = ball.color,
+  max.plots = 30
+)
+
+\method{summary}{ballbin}(object, ...)
+
+\method{print}{summary.ballbin}(x, ...)
+
+\method{plot}{summary.ballbin}(x, ..., bar.color = NULL, bar.colour = bar.color)
 }
 \arguments{
 \item{n}{The number of simulations of the process}
@@ -34,3 +56,16 @@ creates a new object of class \code{summary.ballbin} containing summary statisti
 the bin-counts, effective sample-size, occupancy number, max-count number, and hitting times for each possible
 occupancy number.  Each of these objects has a custom printing and plot methods to give user-friendly output.
 }
+\section{Methods (by generic)}{
+\itemize{
+\item \code{print}: prints the sample
+
+\item \code{plot}: plots the sample
+
+\item \code{summary}: summarizes the sample
+
+\item \code{print}: prints the summary
+
+\item \code{plot}: plots the summary
+}}
+
