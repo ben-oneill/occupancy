@@ -7,7 +7,7 @@
 \alias{pnegocc}
 \alias{qnegocc}
 \alias{rnegocc}
-\title{Mass function of the negative occupancy distribution}
+\title{The negative occupancy distribution}
 \usage{
 dnegocc(x, space, occupancy, prob = 1, approx = FALSE, log = FALSE)
 
@@ -53,7 +53,7 @@ If all inputs are correctly specified (i.e., parameters are in allowable range a
 then the output will be a matrix of probabilities/log-probabilities
 }
 \description{
-\code{dnegocc.all} returns array of probability or log-probability values up to a maximum argument.
+Density, distribution function, quantile function and random generation for the negative occupancy distribution
 }
 \details{
 This function computes probabilities or log-probabilities from the mass function of the negative occupancy

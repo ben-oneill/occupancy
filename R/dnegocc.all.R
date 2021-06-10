@@ -1,6 +1,6 @@
-#' Mass function of the negative occupancy distribution
+#' The negative occupancy distribution
 #'
-#' \code{dnegocc.all} returns array of probability or log-probability values up to a maximum argument.
+#' Density, distribution function, quantile function and random generation for the negative occupancy distribution
 #'
 #' This function computes probabilities or log-probabilities from the mass function of the negative occupancy
 #' distribution.  The computation method uses a recursive algorithm from the following paper:
