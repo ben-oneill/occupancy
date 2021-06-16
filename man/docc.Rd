@@ -9,7 +9,7 @@
 \alias{rocc}
 \title{Mass function of the extended occupancy distribution}
 \usage{
-docc(x, size, space, prob = 1, approx = FALSE, log.p = FALSE)
+docc(x, size, space, prob = 1, approx = FALSE, log = FALSE)
 
 docc.all(max.size, space, prob = 1, approx = FALSE, log = FALSE)
 
@@ -44,11 +44,11 @@ rocc(n, size, space, prob = 1)
 
 \item{approx}{A logical value specifying whether to use the normal approximation to the occupancy distribution}
 
-\item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
+\item{log}{A logical value specifying whether results should be returned as log-probabilities}
 
 \item{max.size, size}{The maximum size parameter for the occupancy distribution (number of balls)}
 
-\item{log}{A logical value specifying whether results should be returned as log-probabilities}
+\item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
 
 \item{lower.tail}{logical; if TRUE (default), probabilities are \eqn{P[X ≤ x]} otherwise, \eqn{P[X > x]}.}
 

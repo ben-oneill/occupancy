@@ -1,5 +1,5 @@
 #' @rdname docc
-docc <- function(x, size, space, prob = 1, approx = FALSE, log.p = FALSE) {
+docc <- function(x, size, space, prob = 1, approx = FALSE, log = FALSE) {
 
   #Check that argument and parameters are appropriate type
   if (!is.numeric(x))                       stop('Error: Argument x is not numeric')
@@ -7,14 +7,14 @@ docc <- function(x, size, space, prob = 1, approx = FALSE, log.p = FALSE) {
   if (!is.numeric(space))                   stop('Error: Space parameter is not numeric')
   if (!is.numeric(prob))                    stop('Error: Probability parameter is not numeric')
   if (!is.logical(approx))                  stop('Error: approx option is not a logical value')
-  if (!is.logical(log.p))                     stop('Error: log option is not a logical value')
+  if (!is.logical(log))                     stop('Error: log option is not a logical value')
 
   #Check that parameters are atomic
   if (length(size)  != 1)                   stop('Error: Size parameter should be a single number')
   if (length(space) != 1)                   stop('Error: Space parameter should be a single number')
   if (length(prob)  != 1)                   stop('Error: Probability parameter should be a single number')
   if (length(approx)   != 1)                stop('Error: approx option should be a single logical value')
-  if (length(log.p)   != 1)                   stop('Error: log option should be a single logical value')
+  if (length(log)   != 1)                   stop('Error: log option should be a single logical value')
 
   #Set parameters
   n   <- as.integer(size)
@@ -36,12 +36,12 @@ docc <- function(x, size, space, prob = 1, approx = FALSE, log.p = FALSE) {
   if ((n == 0)|(prob == 0)) {
     IND <- (x == 0)
     OCC[IND] <- 0
-    if (log.p) { return(OCC) } else { return(exp(OCC)) } }
+    if (log) { return(OCC) } else { return(exp(OCC)) } }
 
   #Compute for trivial case where m = Inf and prob > 0
   if (m == Inf) {
     OCC <- dbinom(x, size = n, prob = prob, log = TRUE)
-    if (log.p) { return(OCC) } else { return(exp(OCC)) } }
+    if (log) { return(OCC) } else { return(exp(OCC)) } }
 
   #Compute for non-trivial case where m < Inf and prob > 0
   if (!approx) {
@@ -54,19 +54,19 @@ docc <- function(x, size, space, prob = 1, approx = FALSE, log.p = FALSE) {
     LOGSTIRLING[1,1] <- 0
     if ((SCALE > 0)&(n > 0)) {
       for (nn in 1:n) {
-        LOGSTIRLING[nn+1, 1] <- nn*log.p(SCALE) } }
+        LOGSTIRLING[nn+1, 1] <- nn*log(SCALE) } }
 
     #Generate subsequent rows
     for (nn in 1:n) {
       for (kk in 1:MAX) {
-        T1 <- log.p(kk + SCALE) + LOGSTIRLING[nn, kk+1]
+        T1 <- log(kk + SCALE) + LOGSTIRLING[nn, kk+1]
         T2 <- LOGSTIRLING[nn, kk]
         LOGSTIRLING[nn+1, kk+1] <- matrixStats::logSumExp(c(T1, T2)) } }
 
     #Generate the log-probabilities for the occupancy distribution
     LOGS <- rep(-Inf, MAX+1)
     for (k in 0:MAX) {
-      LOGS[k+1] <- n*log.p(prob) - n*log.p(m) + lchoose(m,k) + lfactorial(k) + LOGSTIRLING[n+1, k+1] }
+      LOGS[k+1] <- n*log(prob) - n*log(m) + lchoose(m,k) + lfactorial(k) + LOGSTIRLING[n+1, k+1] }
     LOGS <- LOGS - matrixStats::logSumExp(LOGS) }
 
   if (approx) {
@@ -86,4 +86,4 @@ docc <- function(x, size, space, prob = 1, approx = FALSE, log.p = FALSE) {
       OCC[i] <- LOGS[xx+1] } }
 
   #Return output
-  if (log.p) { OCC } else { exp(OCC) } }
+  if (log) { OCC } else { exp(OCC) } }
