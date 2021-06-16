@@ -1,4 +1,4 @@
-#' @rdname docc.all
+#' @rdname docc
 rocc <- function(n, size, space, prob = 1) {
 
   #Check that argument and parameters are appropriate type

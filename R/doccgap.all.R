@@ -20,7 +20,7 @@
 #' @param log A logical value specifying whether results should be returned as log-probabilities
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output
 #' will be a matrix of probabilities/log-probabilities
-
+#' @rdname doccgap
 doccgap.all <- function(size, space = NULL, max.occupancy = size, prob = NULL, scale = NULL, log = FALSE) {
 
   #Check scale parameter

@@ -14,11 +14,10 @@
 #' @param log A logical value specifying whether results should be returned as log-probabilities
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range and arguments are integers)
 #' then the output will be a vector of probabilities/log-probabilities corresponding to the vector argument x
-
+#' @rdname docc
 docc.all <- function(max.size, space, prob = 1, approx = FALSE, log = FALSE) {
 
   #Check that argument and parameters are appropriate type
-  if (!is.numeric(max.x))                   stop('Error: Argument max.x is not numeric')
   if (!is.numeric(max.size))                stop('Error: Maximum size parameter is not numeric')
   if (!is.numeric(space))                   stop('Error: Space parameter is not numeric')
   if (!is.numeric(prob))                    stop('Error: Probability parameter is not numeric')
@@ -38,7 +37,7 @@ docc.all <- function(max.size, space, prob = 1, approx = FALSE, log = FALSE) {
   MAX <- min(n,m)
 
   #Check that parameters are in allowable range
-  if (size != n)                            stop('Error: Maximum size parameter is not an integer')
+  if (max.size != n)                        stop('Error: Maximum size parameter is not an integer')
   if (n < 0)                                stop('Error: Maximum size parameter must be non-negative')
   if (space != m)                           stop('Error: Space parameter is not an integer')
   if (m <= 0)                               stop('Error: Space parameter must be positive')
@@ -92,7 +91,7 @@ docc.all <- function(max.size, space, prob = 1, approx = FALSE, log = FALSE) {
     #Generate the log-probabilities for the occupancy distribution
     for (nn in 1:n) {
     for (kk in 0:min(nn, m)) {
-      OCC[k+1, nn+1] <- nn*log(prob) - nn*log(m) + lchoose(m,kk) + lfactorial(kk) + LOGSTIRLING[nn+1, kk+1] }
+      OCC[kk+1, nn+1] <- nn*log(prob) - nn*log(m) + lchoose(m,kk) + lfactorial(kk) + LOGSTIRLING[nn+1, kk+1] }
       OCC[, nn+1] <- OCC[, nn+1] - matrixStats::logSumExp(OCC[, nn+1]) } }
 
   if (approx) {

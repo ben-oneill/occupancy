@@ -15,7 +15,7 @@
 #' @param log A logical value specifying whether results should be returned as log-probabilities
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range and arguments are integers)
 #' then the output will be a matrix of probabilities/log-probabilities
-
+#' @rdname dnegocc
 dnegocc.all <- function(max.x, space, max.occupancy, prob = 1, approx = FALSE, log = FALSE) {
 
   #Check that argument and parameters are appropriate type

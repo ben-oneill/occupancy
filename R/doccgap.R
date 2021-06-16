@@ -1,4 +1,4 @@
-#' @rdname doccgap.all
+#' @rdname doccgap
 doccgap <- function(x, size, space = NULL, occupancy = size, prob = NULL, scale = NULL, log = FALSE) {
 
   #Check scale parameter

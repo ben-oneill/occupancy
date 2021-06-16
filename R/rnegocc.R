@@ -1,4 +1,4 @@
-#' @rdname dnegocc.all
+#' @rdname dnegocc
 rnegocc <- function(n, space, occupancy, prob = 1) {
 
   #Check that argument and parameters are appropriate type

@@ -1,4 +1,4 @@
-#' @rdname docc.all
+#' @rdname docc
 qocc <- function(p, size, space, prob = 1, approx = FALSE, log.p = FALSE, lower.tail = TRUE) {
 
   #Check that argument and parameters are appropriate type

@@ -1,4 +1,4 @@
-#' @rdname dmaxcount.all
+#' @rdname dmaxcount
 pmaxcount <- function(q, size, space, prob = 1, log.p = FALSE, lower.tail = TRUE) {
 
   #Check that argument and parameters are appropriate type

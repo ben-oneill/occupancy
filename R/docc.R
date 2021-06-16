@@ -1,4 +1,4 @@
-#' @rdname docc.all
+#' @rdname docc
 docc <- function(x, size, space, prob = 1, approx = FALSE, log = FALSE) {
 
   #Check that argument and parameters are appropriate type

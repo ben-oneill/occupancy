@@ -1,4 +1,4 @@
-#' @rdname doccgap.all
+#' @rdname doccgap
 qoccgap <- function(p, size, space = NULL, occupancy = size, prob = NULL, scale = NULL, log.p = FALSE, lower.tail = TRUE) {
 
   #Check scale parameter

@@ -20,7 +20,7 @@
 #' @param log A logical value specifying whether results should be returned as log-probabilities
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output will be a
 #' vector of probabilities/log-probabilities up to the maximum argument values
-
+#' @rdname dmaxcount
 dmaxcount.all <- function(max.x, max.size, space, prob = 1, log = FALSE) {
 
   #Check that argument and parameters are appropriate type
@@ -42,7 +42,7 @@ dmaxcount.all <- function(max.x, max.size, space, prob = 1, log = FALSE) {
   if (space == Inf) { m <- Inf } else { m <- as.integer(space) }
 
   #Check that parameters are in allowable range
-  if (size != n)                            stop('Error: Size parameter is not an integer')
+  if (max.size != n)                        stop('Error: Size parameter is not an integer')
   if (n < 0)                                stop('Error: Size parameter should be nonnegative')
   if (space != m)                           stop('Error: Space parameter is not an integer')
   if (m <= 0)                               stop('Error: Space parameter should be positive')
@@ -76,7 +76,7 @@ dmaxcount.all <- function(max.x, max.size, space, prob = 1, log = FALSE) {
       P1 <- VGAM::log1mexp(-P0)
       MAXCOUNT[1, nn+1] <- P0
       if (MAX > 0) { MAXCOUNT[2, nn+1] <- P1 } }
-    if (log) { return(OUT) } else { return(exp(OUT)) } }
+    if (log) { return(MAX) } else { return(exp(MAX)) } }
 
   #Deal with non-trivial case where m < Inf
   #Create matrix of log-probabilities
