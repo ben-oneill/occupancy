@@ -38,6 +38,8 @@ sample.ballbin(n, size, space, prob, alloc.prob = NULL)
 \item{prob}{The probability parameter for the occupancy distribution (probability of ball occupying its bin)}
 
 \item{alloc.prob}{(Optional) A probability vector for the allocation probabilities for the bins}
+
+\item{x, bar.color, bar.colour}{plotting arguments}
 }
 \value{
 If all inputs are correctly specified (i.e., parameters are in allowable range) then the output will

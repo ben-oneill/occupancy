@@ -355,6 +355,7 @@ print.summary.ballbin <- function(x, ...) {
     cat('(Values ending in + are right-censored values.) \n \n') } }
 
 #' @describeIn sample.ballbin plots the summary
+#' @param x,bar.color,bar.colour plotting arguments
 plot.summary.ballbin <- function(x, ..., bar.color = NULL, bar.colour = bar.color) {
 
   #Check inputs
