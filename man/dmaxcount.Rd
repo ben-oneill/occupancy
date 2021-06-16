@@ -7,7 +7,7 @@
 \alias{pmaxcount}
 \alias{qmaxcount}
 \alias{rmaxcount}
-\title{Probabilty mass function of the maximum-count distribution}
+\title{Probability mass function of the maximum-count distribution}
 \usage{
 dmaxcount(x, size, space, prob = 1, log = FALSE)
 
@@ -20,15 +20,27 @@ qmaxcount(p, size, space, prob = 1, log.p = FALSE, lower.tail = TRUE)
 rmaxcount(n, size, space, prob = 1)
 }
 \arguments{
+\item{x}{vector of quantiles.}
+
 \item{space}{The space parameter for the maximum-count distribution (number of bins)}
 
 \item{prob}{The probability parameter for the occupancy distribution (probability of ball occupying its bin)}
 
-\item{log}{A logical value specifying whether results should be returned as log-probabilities}
+\item{log}{logical; if TRUE, probabilities p are given as log(p).}
 
 \item{max.x}{A vector of numeric values to be used as arguments for the probability mass function}
 
-\item{max.size}{The maximum size parameter for the maximum-count distribution (number of balls)}
+\item{max.size, size}{The maximum size parameter for the maximum-count distribution (number of balls)}
+
+\item{q}{vector of quantiles.}
+
+\item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{lower.tail}{logical; if TRUE (default), probabilities are \eqn{P[X ≤ x]} otherwise, \eqn{P[X > x]}.}
+
+\item{p}{vector of probabilities.}
+
+\item{n}{number of observations. If length(n) > 1, the length is taken to be the number required.}
 }
 \value{
 If all inputs are correctly specified (i.e., parameters are in allowable range) then the output will be a
@@ -42,6 +54,9 @@ This function computes probabilities or log-probabilities from the probability m
 distribution, which is the distribution for the maximum of the counts for the number of balls in a bin in the extended
 occupancy problem.  Details of the algorithm in the classical case can be found in the papers below.  The extension
 to include the probability parameter is done using the binomial mixture representation of the extended occupancy problem.
+}
+\section{References}{
+
 
 Bonetti, M., Corillo, P. and Ogay, A. (2019) Computing the exact distributions of some functions of the ordered multinomial
 counts: maximum, minimum, range and sums of order statistics.
@@ -49,3 +64,4 @@ counts: maximum, minimum, range and sums of order statistics.
 Rappeport, M,A. (1968) Algorithms and computational procedures for the application of order statistics to queuing
 problems. PhD thesis, New York University.
 }
+

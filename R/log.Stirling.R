@@ -11,7 +11,7 @@
 #' @return If all inputs are correctly specified then the output will be a matrix containing the logarithms of
 #' the Stirling numbers of the second kind
 
-log.Stirling <- function(n, k, ncp = 0) {
+logStirling <- function(n, k, ncp = 0) {
 
   #Check that argument values are single numeric values
   if (!is.numeric(n))                        stop('Error: Argument n is not numeric')

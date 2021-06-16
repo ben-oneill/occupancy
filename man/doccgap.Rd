@@ -53,6 +53,8 @@ qoccgap(
 roccgap(n, size, space = NULL, occupancy = size, prob = NULL, scale = NULL)
 }
 \arguments{
+\item{x}{vector of quantiles.}
+
 \item{size}{The size parameter for the occupancy-gap distribution (number of balls)}
 
 \item{space}{The space parameter for the occupancy-gap distribution (number of bins)}
@@ -61,9 +63,17 @@ roccgap(n, size, space = NULL, occupancy = size, prob = NULL, scale = NULL)
 
 \item{scale}{The scale parameter for the occupancy-gap distribution}
 
-\item{log}{A logical value specifying whether results should be returned as log-probabilities}
+\item{log}{logical; if TRUE, probabilities p are given as log(p).}
 
-\item{max.occupancy}{The maximum occupancy parameter for the occupancy-gap distribution (number of occupied bins)}
+\item{max.occupancy, occupancy}{The maximum occupancy parameter for the occupancy-gap distribution (number of occupied bins)}
+
+\item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{lower.tail}{logical; if TRUE (default), probabilities are \eqn{P[X ≤ x]} otherwise, \eqn{P[X > x]}.}
+
+\item{p}{vector of probabilities.}
+
+\item{n}{number of observations. If length(n) > 1, the length is taken to be the number required.}
 }
 \value{
 If all inputs are correctly specified (i.e., parameters are in allowable range) then the output
@@ -75,11 +85,19 @@ will be a matrix of probabilities/log-probabilities
 \details{
 This function computes probabilities or log-probabilities from the mass function of the occupancy-gap
 distribution.  The computation method uses a recursive algorithm from the following paper:
+}
+\section{References}{
 
-O'Neill, B. (XXXX) An examination of the occupancy-gap distribution.
 
-Note: The distribution is parameterised by a \code{scale} parameter, but in applied problems in the context
+O'Neill, B. (forthcoming) An examination of the occupancy-gap distribution.
+}
+
+\section{Note}{
+
+
+The distribution is parameterised by a \code{scale} parameter, but in applied problems in the context
 of the extended occupancy problem this parameter is a function of \code{space} and \code{prob} parameters.
 The function allows either parameterisation (i.e., the user can either specify the \code{scale} paramater or
-both the \code{space} and \code{prob} paramaters).
+both the \code{space} and \code{prob} parameters).
 }
+

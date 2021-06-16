@@ -36,17 +36,27 @@ qnegocc(
 rnegocc(n, space, occupancy, prob = 1)
 }
 \arguments{
+\item{x}{vector of quantiles.}
+
 \item{space}{The space parameter for the negative occupancy distribution (number of bins)}
 
 \item{prob}{The probability parameter for the negative occupancy distribution (probability of ball occupying its bin)}
 
 \item{approx}{A logical value specifying whether to use an approximation for the distribution}
 
-\item{log}{A logical value specifying whether results should be returned as log-probabilities}
+\item{log}{logical; if TRUE, probabilities p are given as log(p).}
 
 \item{max.x}{A vector of numeric values to be used as arguments for the mass function}
 
-\item{max.occupancy}{The maximum occupancy parameter for the negative occupancy distribution (number of occupied bins)}
+\item{max.occupancy, occupancy}{The maximum occupancy parameter for the negative occupancy distribution (number of occupied bins)}
+
+\item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{lower.tail}{logical; if TRUE (default), probabilities are \eqn{P[X ≤ x]} otherwise, \eqn{P[X > x]}.}
+
+\item{p}{vector of probabilities.}
+
+\item{n}{number of observations. If length(n) > 1, the length is taken to be the number required.}
 }
 \value{
 If all inputs are correctly specified (i.e., parameters are in allowable range and arguments are integers)
@@ -57,7 +67,11 @@ Density, distribution function, quantile function and random generation for the 
 }
 \details{
 This function computes probabilities or log-probabilities from the mass function of the negative occupancy
-distribution.  The computation method uses a recursive algorithm from the following paper:
+distribution.  The computation method uses a recursive algorithm.
+}
+\section{References}{
+
 
 O'Neill, B. (2021) An examination of the negative-occupancy distribution and the coupon-collector distribution.
 }
+

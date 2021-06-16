@@ -9,7 +9,7 @@
 \alias{rocc}
 \title{Mass function of the extended occupancy distribution}
 \usage{
-docc(x, size, space, prob = 1, approx = FALSE, log = FALSE)
+docc(x, size, space, prob = 1, approx = FALSE, log.p = FALSE)
 
 docc.all(max.size, space, prob = 1, approx = FALSE, log = FALSE)
 
@@ -36,15 +36,25 @@ qocc(
 rocc(n, size, space, prob = 1)
 }
 \arguments{
+\item{x}{vector of quantiles.}
+
 \item{space}{The space pararmeter for the occupancy distribution (number of bins)}
 
 \item{prob}{The probability parameter for the occupancy distribution (probability of ball occupying its bin)}
 
 \item{approx}{A logical value specifying whether to use the normal approximation to the occupancy distribution}
 
+\item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{max.size, size}{The maximum size parameter for the occupancy distribution (number of balls)}
+
 \item{log}{A logical value specifying whether results should be returned as log-probabilities}
 
-\item{max.size}{The maximum size parameter for the occupancy distribution (number of balls)}
+\item{lower.tail}{logical; if TRUE (default), probabilities are \eqn{P[X ≤ x]} otherwise, \eqn{P[X > x]}.}
+
+\item{p}{vector of probabilities.}
+
+\item{n}{number of observations. If length(n) > 1, the length is taken to be the number required.}
 }
 \value{
 If all inputs are correctly specified (i.e., parameters are in allowable range and arguments are integers)
@@ -55,7 +65,11 @@ then the output will be a vector of probabilities/log-probabilities correspondin
 }
 \details{
 This function computes probabilities or log-probabilities from the mass function of the extended occupancy
-distribution.  Further details on the distribution can be found in the following paper:
+distribution.
+}
+\section{References}{
+
 
 O'Neill, B. (2021) Three distributions in the extended occupancy problem.
 }
+

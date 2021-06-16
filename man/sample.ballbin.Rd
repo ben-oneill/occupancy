@@ -39,7 +39,13 @@ sample.ballbin(n, size, space, prob, alloc.prob = NULL)
 
 \item{alloc.prob}{(Optional) A probability vector for the allocation probabilities for the bins}
 
-\item{x, bar.color, bar.colour}{plotting arguments}
+\item{x, object}{ballbin objects (for generics)}
+
+\item{...}{unused}
+
+\item{ball.size, ball.color, ball.colour, max.plots}{Set the size, color, and number of plots}
+
+\item{bar.color, bar.colour}{plotting arguments}
 }
 \value{
 If all inputs are correctly specified (i.e., parameters are in allowable range) then the output will
@@ -71,3 +77,11 @@ occupancy number.  Each of these objects has a custom printing and plot methods 
 \item \code{plot}: plots the summary
 }}
 
+\examples{
+
+d <- sample.ballbin(12, 10, 4, .4)
+print(d)
+plot(d)
+summary(d)
+plot(summary(d))
+}

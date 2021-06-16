@@ -40,7 +40,7 @@ qmaxcount <- function(p, size, space, prob = 1, log.p = FALSE, lower.tail = TRUE
 
   #Deal with the trivial case where n = 0
   if (n == 0) {
-    QUANTILE <- rep(0, length(x))
+    QUANTILE <- rep(0, length(p))
     return(QUANTILE) }
 
   #Create matrix of log-probabilities

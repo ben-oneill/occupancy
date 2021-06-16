@@ -3,11 +3,15 @@
 #' \code{docc.all} returns the probability or log-probability values for the arguments.
 #'
 #' This function computes probabilities or log-probabilities from the mass function of the extended occupancy
-#' distribution.  Further details on the distribution can be found in the following paper:
+#' distribution.
+#'
+#' @section References:
 #'
 #' O'Neill, B. (2021) Three distributions in the extended occupancy problem.
 #'
-#' @param max.size The maximum size parameter for the occupancy distribution (number of balls)
+#' @inheritParams .inheritparams
+#'
+#' @param max.size,size The maximum size parameter for the occupancy distribution (number of balls)
 #' @param space The space pararmeter for the occupancy distribution (number of bins)
 #' @param prob The probability parameter for the occupancy distribution (probability of ball occupying its bin)
 #' @param approx A logical value specifying whether to use the normal approximation to the occupancy distribution

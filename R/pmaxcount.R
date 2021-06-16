@@ -33,8 +33,8 @@ pmaxcount <- function(q, size, space, prob = 1, log.p = FALSE, lower.tail = TRUE
 
   #Deal with trivial case where n = 0
   if (n == 0) {
-    OUT <- rep(-Inf, length(x))
-    IND <- (x >= 0)
+    OUT <- rep(-Inf, length(q))
+    IND <- (q >= 0)
     OUT[IND] <- 0
     if (!lower.tail) { OUT <- VGAM::log1mexp(-OUT) }
     if (log.p) { return(OUT) } else { return(exp(OUT)) } }

@@ -20,8 +20,11 @@
 #' for each random sample from the process.
 #' @examples
 #'
-#' d <- sample.ballbin(1000, 20, 4, .4)
-#'
+#' d <- sample.ballbin(12, 10, 4, .4)
+#' print(d)
+#' plot(d)
+#' summary(d)
+#' plot(summary(d))
 sample.ballbin <- function(n, size, space, prob, alloc.prob = NULL) {
 
   #Check that argument and parameters are appropriate type
@@ -124,6 +127,7 @@ print.ballbin <- function(x, ...) {
   cat('\n')}
 
 #' @describeIn sample.ballbin plots the sample
+#' @param ball.size,ball.color,ball.colour,max.plots Set the size, color, and number of plots
 plot.ballbin <- function(x, ..., ball.size = NULL, ball.color = NULL, ball.colour = ball.color, max.plots = 30) {
 
   #Check inputs
@@ -208,7 +212,7 @@ plot.ballbin <- function(x, ..., ball.size = NULL, ball.color = NULL, ball.colou
   PLOTDATA <- rbind(BALLDATA, BINDATA)
   LABELS <- as.list(rownames(ALLOC))
   names(LABELS) <- 1:obs
-  PLOT <- ggplot2::ggplot(ggplot2::aes(x = Bin, y = Ball, fill = Occ), data = PLOTDATA) +
+  PLOT <- ggplot2::ggplot(ggplot2::aes(x = !!as.symbol("Bin"), y = !!as.symbol("Ball"), fill = !!as.symbol("Occ")), data = PLOTDATA) +
           ggplot2::geom_point(size = BALL.SIZE,   shape = 21, data = BALLDATA) +
           ggplot2::geom_point(size = BALL.SIZE+2, shape = 22, data = BINDATA) +
           ggplot2::scale_x_continuous(labels = 1:m, breaks = 1:m) +
@@ -359,7 +363,8 @@ print.summary.ballbin <- function(x, ...) {
     cat('(Values ending in + are right-censored values.) \n \n') } }
 
 #' @describeIn sample.ballbin plots the summary
-#' @param x,bar.color,bar.colour plotting arguments
+#' @param x,object ballbin objects (for generics)
+#' @param bar.color,bar.colour plotting arguments
 plot.summary.ballbin <- function(x, ..., bar.color = NULL, bar.colour = bar.color) {
 
   #Check inputs
@@ -404,7 +409,7 @@ plot.summary.ballbin <- function(x, ..., bar.color = NULL, bar.colour = bar.colo
 
   #Create the empirical occupancy plot
   if (!is.null(bar.colour)) { BAR.COLOUR <- bar.colour } else { BAR.COLOUR <- 'blue' }
-  PLOT <- ggplot2::ggplot(ggplot2::aes(x = Occupancy, y = Probability), data = PLOTDATA) +
+  PLOT <- ggplot2::ggplot(ggplot2::aes(x = !!as.symbol("Occupancy"), y = !!as.symbol("Probability")), data = PLOTDATA) +
           ggplot2::geom_bar(stat = 'identity', fill = BAR.COLOUR) +
           ggplot2::scale_x_continuous(labels = 0:m, breaks = 0:m) +
           ggplot2::theme(plot.title    = ggplot2::element_text(hjust = 0.5, size = 14, face = 'bold'),
