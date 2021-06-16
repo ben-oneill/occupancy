@@ -18,7 +18,10 @@
 #' be a list of class \code{ballbin} containing \code{n} random samples from the process.  If you call \code{summary}
 #' on this object the output will be another list of class \code{summary.ballbin} containing summary statistics
 #' for each random sample from the process.
-
+#' @examples
+#'
+#' d <- sample.ballbin(1000, 20, 4, .4)
+#'
 sample.ballbin <- function(n, size, space, prob, alloc.prob = NULL) {
 
   #Check that argument and parameters are appropriate type
@@ -86,6 +89,7 @@ sample.ballbin <- function(n, size, space, prob, alloc.prob = NULL) {
   OUT }
 
 #' @describeIn sample.ballbin prints the sample
+#' @param ... unused
 print.ballbin <- function(x, ...) {
 
   #Check input class
@@ -159,8 +163,8 @@ plot.ballbin <- function(x, ..., ball.size = NULL, ball.color = NULL, ball.colou
   #Check installed packages and load them
   GGPLOT2 <- requireNamespace('ggplot2', quietly = TRUE)
   GREXTRA <- requireNamespace('gridExtra', quietly = TRUE)
-  if (GGPLOT2) { library(ggplot2)   } else { stop('Error: Plotting a \'ballbins\' object requires the ggplot2 package') }
-  if (GREXTRA) { library(gridExtra) } else { stop('Error: Plotting a \'ballbins\' object requires the gridExtra package') }
+  if (!GGPLOT2) { stop('Error: Plotting a \'ballbins\' object requires the ggplot2 package') }
+  if (!GREXTRA)  { stop('Error: Plotting a \'ballbins\' object requires the gridExtra package') }
 
   #Generate occupancy indicators
   OCC           <- matrix(FALSE, nrow = obs, ncol = m)
@@ -222,7 +226,7 @@ plot.ballbin <- function(x, ..., ball.size = NULL, ball.color = NULL, ball.colou
                          axis.ticks.y  = ggplot2::element_blank(),
                          panel.grid.major.y = ggplot2::element_blank(),
                          panel.grid.minor.y = ggplot2::element_blank(),
-                         panel.spacing = unit(1, 'lines')) +
+                         panel.spacing = ggplot2::unit(1, 'lines')) +
           ggplot2::ggtitle('Balls-in-Bins Sample Plots') +
           ggplot2::labs(subtitle = SUBTITLE)
 
@@ -386,8 +390,8 @@ plot.summary.ballbin <- function(x, ..., bar.color = NULL, bar.colour = bar.colo
   #Check installed packages and load them
   GGPLOT2 <- requireNamespace('ggplot2', quietly = TRUE)
   GREXTRA <- requireNamespace('gridExtra', quietly = TRUE)
-  if (GGPLOT2) { library(ggplot2)   } else { stop('Error: Plotting a \'summary.ballbins\' object requires the ggplot2 package') }
-  if (GREXTRA) { library(gridExtra) } else { stop('Error: Plotting a \'summary.ballbins\' object requires the gridExtra package') }
+  if (!GGPLOT2) { stop('Error: Plotting a \'summary.ballbins\' object requires the ggplot2 package') }
+  if (!GREXTRA) { stop('Error: Plotting a \'summary.ballbins\' object requires the gridExtra package') }
 
   #Create plot data
   PLOTDATA <- data.frame(Occupancy = 0:min(n,m), Probability = 0)
