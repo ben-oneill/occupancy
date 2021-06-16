@@ -44,7 +44,7 @@ rocc(n, size, space, prob = 1)
 
 \item{approx}{A logical value specifying whether to use the normal approximation to the occupancy distribution}
 
-\item{log}{A logical value specifying whether results should be returned as log-probabilities}
+\item{log}{logical; if TRUE, probabilities p are given as log(p).}
 
 \item{max.size, size}{The maximum size parameter for the occupancy distribution (number of balls)}
 

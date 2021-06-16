@@ -15,7 +15,6 @@
 #' @param space The space pararmeter for the occupancy distribution (number of bins)
 #' @param prob The probability parameter for the occupancy distribution (probability of ball occupying its bin)
 #' @param approx A logical value specifying whether to use the normal approximation to the occupancy distribution
-#' @param log A logical value specifying whether results should be returned as log-probabilities
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range and arguments are integers)
 #' then the output will be a vector of probabilities/log-probabilities corresponding to the vector argument x
 #' @rdname docc
