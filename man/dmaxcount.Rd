@@ -7,7 +7,7 @@
 \alias{pmaxcount}
 \alias{qmaxcount}
 \alias{rmaxcount}
-\title{Probability mass function of the maximum-count distribution}
+\title{The Maximum-Count Occupancy Distribution}
 \usage{
 dmaxcount(x, size, space, prob = 1, log = FALSE)
 
@@ -47,9 +47,12 @@ If all inputs are correctly specified (i.e., parameters are in allowable range) 
 vector of probabilities/log-probabilities up to the maximum argument values
 }
 \description{
-\code{dmaxcount.all} returns a matrix of probability or log-probability values up to a maximum arguments.
+Density, distribution function, quantile function and random generation for
+the maximum count occupancy distribution with size and shape parameters.
 }
 \details{
+\code{dmaxcount.all} returns the entire PMF.
+
 This function computes probabilities or log-probabilities from the probability mass function of the maximum-count
 distribution, which is the distribution for the maximum of the counts for the number of balls in a bin in the extended
 occupancy problem.  Details of the algorithm in the classical case can be found in the papers below.  The extension
@@ -65,3 +68,9 @@ Rappeport, M,A. (1968) Algorithms and computational procedures for the applicati
 problems. PhD thesis, New York University.
 }
 
+\examples{
+x <- rmaxcount(10, 2, 2)
+p <- pmaxcount(x, 2, 2)
+stopifnot(x == qmaxcount(p, 2, 2))
+dmaxcount.all(2,2,2)
+}

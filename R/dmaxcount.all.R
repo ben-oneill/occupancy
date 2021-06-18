@@ -1,6 +1,9 @@
-#' Probability mass function of the maximum-count distribution
+#' The Maximum-Count Occupancy Distribution
 #'
-#' \code{dmaxcount.all} returns a matrix of probability or log-probability values up to a maximum arguments.
+#' Density, distribution function, quantile function and random generation for
+#' the maximum count occupancy distribution with size and shape parameters.
+#'
+#' \code{dmaxcount.all} returns the entire PMF.
 #'
 #' This function computes probabilities or log-probabilities from the probability mass function of the maximum-count
 #' distribution, which is the distribution for the maximum of the counts for the number of balls in a bin in the extended
@@ -24,6 +27,11 @@
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output will be a
 #' vector of probabilities/log-probabilities up to the maximum argument values
 #' @rdname dmaxcount
+#' @examples
+#' x <- rmaxcount(10, 2, 2)
+#' p <- pmaxcount(x, 2, 2)
+#' stopifnot(x == qmaxcount(p, 2, 2))
+#' dmaxcount.all(2,2,2)
 dmaxcount.all <- function(max.x, max.size, space, prob = 1, log = FALSE) {
 
   #Check that argument and parameters are appropriate type

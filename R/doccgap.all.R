@@ -1,6 +1,9 @@
-#' Mass function of the occupancy-gap distribution
+#' The Occupancy-Gap Distribution
 #'
-#' \code{doccgap.all} returns array of probability or log-probability values up to a maximum argument.
+#' Density, distribution function, quantile function and random generation
+#' for the Occupancy-Gap Distribution with size and scale parameters (see note).
+#'
+#' \code{docc.all} returns the entire PMF.
 #'
 #' This function computes probabilities or log-probabilities from the mass function of the occupancy-gap
 #' distribution.  The computation method uses a recursive algorithm from the following paper:
@@ -27,6 +30,11 @@
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output
 #' will be a matrix of probabilities/log-probabilities
 #' @rdname doccgap
+#' @examples
+#' x <- roccgap(10, 20, 2, 2, .5)
+#' p <- poccgap(x, 20, 2, 2, .5)
+#' stopifnot(x == qoccgap(p, 20, 2, 2, .5))
+#' doccgap.all(20, 2, 2, .5)
 doccgap.all <- function(size, space = NULL, max.occupancy = size, prob = NULL, scale = NULL, log = FALSE) {
 
   #Check scale parameter

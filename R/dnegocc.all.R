@@ -1,9 +1,11 @@
-#' The negative occupancy distribution
+#' The Negative Occupancy Distribution
 #'
-#' Density, distribution function, quantile function and random generation for the negative occupancy distribution
+#' Density, distribution function, quantile function and random generation
+#' for the negative occupancy distribution with space and occupancy parameters.
 #'
-#' This function computes probabilities or log-probabilities from the mass function of the negative occupancy
-#' distribution.  The computation method uses a recursive algorithm.
+#' \code{dnegcount.all} returns the entire PMF.
+#'
+#' The computation method uses a recursive algorithm described in the reference.
 #'
 #' @section References:
 #'
@@ -19,6 +21,11 @@
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range and arguments are integers)
 #' then the output will be a matrix of probabilities/log-probabilities
 #' @rdname dnegocc
+#' @examples
+#' x <- rnegocc(10, 2, 2)
+#' p <- pnegocc(x, 2, 2)
+#' #stopifnot(x == qnegocc(p, 2, 2))
+#' dnegocc.all(5,2,2)
 dnegocc.all <- function(max.x, space, max.occupancy, prob = 1, approx = FALSE, log = FALSE) {
 
   #Check that argument and parameters are appropriate type

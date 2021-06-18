@@ -1,9 +1,9 @@
-#' Mass function of the extended occupancy distribution
+#' The Extended Occupancy Distribution
 #'
-#' \code{docc.all} returns the probability or log-probability values for the arguments.
+#' Density, distribution function, quantile function and random generation
+#' for the extended occupancy distribution with size and shape parameters.
 #'
-#' This function computes probabilities or log-probabilities from the mass function of the extended occupancy
-#' distribution.
+#' \code{docc.all} returns the entire PMF.
 #'
 #' @section References:
 #'
@@ -12,12 +12,17 @@
 #' @inheritParams .inheritparams
 #'
 #' @param max.size,size The maximum size parameter for the occupancy distribution (number of balls)
-#' @param space The space pararmeter for the occupancy distribution (number of bins)
+#' @param space The space parameter for the occupancy distribution (number of bins)
 #' @param prob The probability parameter for the occupancy distribution (probability of ball occupying its bin)
 #' @param approx A logical value specifying whether to use the normal approximation to the occupancy distribution
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range and arguments are integers)
 #' then the output will be a vector of probabilities/log-probabilities corresponding to the vector argument x
 #' @rdname docc
+#' @examples
+#' x <- rocc(10, 2, 2)
+#' p <- pocc(x, 2, 2)
+#' stopifnot(x == qocc(p, 2, 2))
+#' docc.all(2,2)
 docc.all <- function(max.size, space, prob = 1, approx = FALSE, log = FALSE) {
 
   #Check that argument and parameters are appropriate type

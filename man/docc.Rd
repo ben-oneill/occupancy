@@ -7,7 +7,7 @@
 \alias{pocc}
 \alias{qocc}
 \alias{rocc}
-\title{Mass function of the extended occupancy distribution}
+\title{The Extended Occupancy Distribution}
 \usage{
 docc(x, size, space, prob = 1, approx = FALSE, log = FALSE)
 
@@ -38,7 +38,7 @@ rocc(n, size, space, prob = 1)
 \arguments{
 \item{x}{vector of quantiles.}
 
-\item{space}{The space pararmeter for the occupancy distribution (number of bins)}
+\item{space}{The space parameter for the occupancy distribution (number of bins)}
 
 \item{prob}{The probability parameter for the occupancy distribution (probability of ball occupying its bin)}
 
@@ -61,11 +61,11 @@ If all inputs are correctly specified (i.e., parameters are in allowable range a
 then the output will be a vector of probabilities/log-probabilities corresponding to the vector argument x
 }
 \description{
-\code{docc.all} returns the probability or log-probability values for the arguments.
+Density, distribution function, quantile function and random generation
+for the extended occupancy distribution with size and shape parameters.
 }
 \details{
-This function computes probabilities or log-probabilities from the mass function of the extended occupancy
-distribution.
+\code{docc.all} returns the entire PMF.
 }
 \section{References}{
 
@@ -73,3 +73,9 @@ distribution.
 O'Neill, B. (2021) Three distributions in the extended occupancy problem.
 }
 
+\examples{
+x <- rocc(10, 2, 2)
+p <- pocc(x, 2, 2)
+stopifnot(x == qocc(p, 2, 2))
+docc.all(2,2)
+}

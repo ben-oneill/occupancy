@@ -7,7 +7,7 @@
 \alias{pnegocc}
 \alias{qnegocc}
 \alias{rnegocc}
-\title{The negative occupancy distribution}
+\title{The Negative Occupancy Distribution}
 \usage{
 dnegocc(x, space, occupancy, prob = 1, approx = FALSE, log = FALSE)
 
@@ -63,11 +63,13 @@ If all inputs are correctly specified (i.e., parameters are in allowable range a
 then the output will be a matrix of probabilities/log-probabilities
 }
 \description{
-Density, distribution function, quantile function and random generation for the negative occupancy distribution
+Density, distribution function, quantile function and random generation
+for the negative occupancy distribution with space and occupancy parameters.
 }
 \details{
-This function computes probabilities or log-probabilities from the mass function of the negative occupancy
-distribution.  The computation method uses a recursive algorithm.
+\code{dnegcount.all} returns the entire PMF.
+
+The computation method uses a recursive algorithm described in the reference.
 }
 \section{References}{
 
@@ -75,3 +77,9 @@ distribution.  The computation method uses a recursive algorithm.
 O'Neill, B. (2021) An examination of the negative-occupancy distribution and the coupon-collector distribution.
 }
 
+\examples{
+x <- rnegocc(10, 2, 2)
+p <- pnegocc(x, 2, 2)
+#stopifnot(x == qnegocc(p, 2, 2))
+dnegocc.all(5,2,2)
+}

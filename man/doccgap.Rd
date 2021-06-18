@@ -7,7 +7,7 @@
 \alias{poccgap}
 \alias{qoccgap}
 \alias{roccgap}
-\title{Mass function of the occupancy-gap distribution}
+\title{The Occupancy-Gap Distribution}
 \usage{
 doccgap(
   x,
@@ -80,9 +80,12 @@ If all inputs are correctly specified (i.e., parameters are in allowable range) 
 will be a matrix of probabilities/log-probabilities
 }
 \description{
-\code{doccgap.all} returns array of probability or log-probability values up to a maximum argument.
+Density, distribution function, quantile function and random generation
+for the Occupancy-Gap Distribution with size and scale parameters (see note).
 }
 \details{
+\code{docc.all} returns the entire PMF.
+
 This function computes probabilities or log-probabilities from the mass function of the occupancy-gap
 distribution.  The computation method uses a recursive algorithm from the following paper:
 }
@@ -101,3 +104,9 @@ The function allows either parameterisation (i.e., the user can either specify t
 both the \code{space} and \code{prob} parameters).
 }
 
+\examples{
+x <- roccgap(10, 20, 2, 2, .5)
+p <- poccgap(x, 20, 2, 2, .5)
+stopifnot(x == qoccgap(p, 20, 2, 2, .5))
+doccgap.all(20, 2, 2, .5)
+}
