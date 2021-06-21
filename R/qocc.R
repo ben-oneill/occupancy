@@ -40,7 +40,10 @@ qocc <- function(p, size, space, prob = 1, approx = FALSE, log.p = FALSE, lower.
   #Compute log-probabilities for input p
   #Adjust for floating point error in computation log(exp(...))
   MAX.FP.ERROR <- .Machine$double.eps
-  if (log.p) { LOGPROBS <- p } else { LOGPROBS <- log(p) - MAX.FP.ERROR }
+  if (lower.tail) {
+    if (log.p) { LOGP <- p } else { LOGP <- log(p) - MAX.FP.ERROR } }
+  if (!lower.tail) {
+    if (log.p) { LOGP <- VGAM::log1mexp(-p) } else { LOGP <- log(1-p) - MAX.FP.ERROR } }
 
   #Compute for trivial case where n = 0 or prob = 0
   if ((n == 0)|(prob == 0)) {
@@ -97,8 +100,8 @@ qocc <- function(p, size, space, prob = 1, approx = FALSE, log.p = FALSE, lower.
   #Generate quantiles
   QUANTILES <- rep(0, length(LOGPROBS))
   for (i in 1:length(LOGPROBS)) {
-    if (lower.tail)   { logprob <- LOGPROBS[i] } else { logprob <- VGAM::log1mexp(-LOGPROBS[i]) }
-    if (logprob == 0) { QUANTILES[i] <- MAX } else { QUANTILES[i] <- sum(CUMLOGS < logprob) } }
+    logp <- LOGP[i]
+    if (logp == 0) { QUANTILES[i] <- MAX } else { QUANTILES[i] <- sum(CUMLOGS < logp) } }
 
   #Return output
   QUANTILES }
