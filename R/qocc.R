@@ -37,8 +37,10 @@ qocc <- function(p, size, space, prob = 1, approx = FALSE, log.p = FALSE, lower.
   if (log.p) {
     if (max(p) > 0)                                    stop('Error: Log-probability values in p must be less than or equal to zero') }
 
-  #Set maximum log-probability for quantiles
-  if (log.p) { LOGPROBS <- p } else { LOGPROBS <- log(p) }
+  #Compute log-probabilities for input p
+  #Adjust for floating point error in computation log(exp(...))
+  MAX.FP.ERROR <- .Machine$double.eps
+  if (log.p) { LOGPROBS <- p } else { LOGPROBS <- log(p) - MAX.FP.ERROR }
 
   #Compute for trivial case where n = 0 or prob = 0
   if ((n == 0)|(prob == 0)) {
