@@ -46,6 +46,7 @@ qnegocc <- function(p, space, occupancy, prob = 1, approx = FALSE, log.p = FALSE
   if (space != m)                            stop('Error: Space parameter is not an integer')
   if (m <= 0)                                stop('Error: Space parameter must be positive')
   if (occupancy != k)                        stop('Error: Occupancy parameter is not an integer')
+  if (k < 0)                                 stop('Error: Occupancy parameter must be non-negative')
   if (k > m)                                 stop('Error: Occupancy parameter is larger than space parameter')
   if (prob < 0)                              stop('Error: Probability parameter must be between zero and one')
   if (prob > 1)                              stop('Error: Probability parameter must be between zero and one')
@@ -57,6 +58,11 @@ qnegocc <- function(p, space, occupancy, prob = 1, approx = FALSE, log.p = FALSE
   if (log.p) {
     if (max(p) > 0)             stop('Error: Log-probability values in p must be less than or equal to zero') }
 
+  #Compute for special case where k = 0
+  if (k == 0) {
+    QUANTILES <- rep(0, length(p))
+    return(QUANTILES) }
+  
   #Set maximum log-probability for quantiles
   #We exclude input probabilities of one, since quantiles for these are computed manually
   if (log.p) { LOGPROBS <- p } else { LOGPROBS <- log(p) }
@@ -95,10 +101,10 @@ qnegocc <- function(p, space, occupancy, prob = 1, approx = FALSE, log.p = FALSE
       t <- t+1
       NEGOCC <- rbind(NEGOCC, rep(-Inf, k+1))
 
-      #Compute first value
+      #Compute first non-trivial value (k = 1)
       NEGOCC[t+1, 2] <- log(prob) + t*log(1-prob)
 
-      #Compute values rows via recursion
+      #Compute remaining values via recursion
       r <- 2
       while (r <= k) {
         LLL <- (0:t)*log(1-prob*(m-r+1)/m)
