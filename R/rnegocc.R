@@ -37,9 +37,15 @@ rnegocc <- function(n, space, occupancy, prob = 1) {
   if (space != m)                            stop('Error: Space parameter is not an integer')
   if (m <= 0)                                stop('Error: Space parameter must be positive')
   if (occupancy != k)                        stop('Error: Occupancy parameter is not an integer')
+  if (k < 0)                                 stop('Error: Occupancy parameter must be non-negative')
   if (k > m)                                 stop('Error: Occupancy parameter is larger than space parameter')
   if (prob < 0)                              stop('Error: Probability parameter must be between zero and one')
   if (prob > 1)                              stop('Error: Probability parameter must be between zero and one')
+  
+  #Compute for special case where k = 0
+  if (k == 0) {
+    OUT <- rep(0, n)
+    return(OUT) }
 
   #Generate random values
   GEOM <- matrix(0, nrow = n, ncol = k)
