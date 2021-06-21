@@ -1,18 +1,4 @@
-#' Generates random variables from the extended occupancy distribution
-#'
-#' \code{rocc} returns random variables from the extended occupancy distribution.
-#'
-#' This function generates a set of random variables from the extended occupancy distribution using an underlying
-#' random set of pseudo-random numbers.
-#'
-#' @usage \code{rocc(n, size, space, prob)}
-#' @param n The number of observations in the random sample
-#' @param size The size parameter for the occupancy distribution (number of balls)
-#' @param space The space pararmeter for the occupancy distribution (number of bins)
-#' @param prob The probability parameter for the occupancy distribution (probability of ball occupying its bin)
-#' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output will be a
-#' vector of random values of length \code{n}
-
+#' @rdname docc
 rocc <- function(n, size, space, prob = 1) {
 
   #Check that argument and parameters are appropriate type

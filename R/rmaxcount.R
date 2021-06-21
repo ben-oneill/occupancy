@@ -1,18 +1,4 @@
-#' Random generation from the maximum-count distribution
-#'
-#' \code{rmaxcount} returns random values from the distribution.
-#'
-#' This function generates random values from the maximum-count distribution, which is the distribution for the
-#' maximum of the counts for the number of balls in a bin in the extended occupancy problem.
-#'
-#' @usage \code{rmaxcount(p, size, space, prob)}
-#' @param n The number of random values to generate
-#' @param size The size parameter for the maximum-count distribution (number of balls)
-#' @param space The space parameter for the maximum-count distribution (number of bins)
-#' @param prob The probability parameter for the occupancy distribution (probability of ball occupying its bin)
-#' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output will be a
-#' vector of random values of length \code{n}
-
+#' @rdname dmaxcount
 rmaxcount <- function(n, size, space, prob = 1) {
 
   #Check that argument and parameters are appropriate type
@@ -41,7 +27,7 @@ rmaxcount <- function(n, size, space, prob = 1) {
   if ((prob < 0)|(prob > 1))                stop('Error: Probability parameter is not between zero and one')
 
   #Deal with trivial case where size = 0
-  if (nn = 0) {
+  if (nn == 0) {
     OUT <- rep(0, n)
     return(OUT) }
 

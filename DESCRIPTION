@@ -1,20 +1,20 @@
 Package: occupancy
 Type: Package
-Title: Adds functions for various occupancy distributions
+Title: Probability Functions for Occupancy Distributions
 Version: 1.0
-Date: 21 July 2019
+Date: 09 June 2021
 Authors@R: person("Ben", "O'Neill", email = "ben.oneill@hotmail.com",
   role = c("aut", "cre"))
-Author: Ben O'Neill [aut, cre],
 Maintainer: Ben O'Neill <ben.oneill@hotmail.com>
-Description: This package adds functions to work with various occupancy distributions, including the classical 
-    and extended occupancy distributions.  These distributions occur in cases where balls are randomly allocated 
-    to bins.  (The manual contains more information on the specific distributions and the situations in which 
-    they arise.)  Using syntax analogous to the distributions in base R, the package allows the user to obtain 
-    the PDF, CDF, quantile function, and generation of random variables.  There are also functions to calculate 
-    the first four central moments of the distributions.
+Description: The classical and extended occupancy distributions occur in cases where balls are randomly allocated 
+    to bins. The PDF, CDF, quantile functions, generation of random variates, and calculating 
+    the first four central moments of the distributions are implemented as described in 
+    <doi:10.1080/00031305.2019.1699445>.
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
 Imports: matrixStats
-RoxygenNote: 6.1.1
+Suggests:
+  VGAM,
+  ggplot2,
+  gridExtra
+RoxygenNote: 7.1.1

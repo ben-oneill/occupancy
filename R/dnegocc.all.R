@@ -1,22 +1,31 @@
-#' Mass function of the negative occupancy distribution
+#' The Negative Occupancy Distribution
 #'
-#' \code{dnegocc.all} returns array of probability or log-probability values up to a maximum argument.
+#' Density, distribution function, quantile function and random generation
+#' for the negative occupancy distribution with space and occupancy parameters.
 #'
-#' This function computes probabilities or log-probabilities from the mass function of the negative occupancy
-#' distribution.  The computation method uses a recursive algorithm from the following paper:
+#' \code{dnegcount.all} returns the entire PMF.
+#'
+#' The computation method uses a recursive algorithm described in the reference.
+#'
+#' @section References:
 #'
 #' O'Neill, B. (2021) An examination of the negative-occupancy distribution and the coupon-collector distribution.
 #'
-#' @usage \code{dnegocc.all(max.x, space, occupancy, prob, approx = FALSE, log = FALSE)}
+#' @inheritParams .inheritparams
+#'
 #' @param max.x A vector of numeric values to be used as arguments for the mass function
 #' @param space The space parameter for the negative occupancy distribution (number of bins)
-#' @param max.occupancy The maximum occupancy parameter for the negative occupancy distribution (number of occupied bins)
+#' @param max.occupancy,occupancy The maximum occupancy parameter for the negative occupancy distribution (number of occupied bins)
 #' @param prob The probability parameter for the negative occupancy distribution (probability of ball occupying its bin)
 #' @param approx A logical value specifying whether to use an approximation for the distribution
-#' @param log A logical value specifying whether results should be returned as log-probabilities
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range and arguments are integers)
 #' then the output will be a matrix of probabilities/log-probabilities
-
+#' @rdname dnegocc
+#' @examples
+#' x <- rnegocc(10, 2, 2)
+#' p <- pnegocc(x, 2, 2)
+#' stopifnot(x == qnegocc(p, 2, 2))
+#' dnegocc.all(5,2,2)
 dnegocc.all <- function(max.x, space, max.occupancy, prob = 1, approx = FALSE, log = FALSE) {
 
   #Check that argument and parameters are appropriate type

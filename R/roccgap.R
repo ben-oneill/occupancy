@@ -1,27 +1,4 @@
-#' Random generation from the occupancy-gap distribution
-#'
-#' \code{roccgap} returns random values from the distribution.
-#'
-#' This function generates random values from the occupancy-gap distribution.  The computation method uses inverse
-#' transformation sampling with CDF computation using a recursive algorithm from the following paper:
-#'
-#' O'Neill, B. (XXXX) An examination of the occupancy-gap distribution.
-#'
-#' Note: The distribution is parameterised by a \code{scale} paramater, but in applied problems in the context
-#' of the extended occupancy problem this parameter is a function of \code{space} and \code{prob} parameters.
-#' The function allows either parameterisation (i.e., the user can either specify the \code{scale} paramater or
-#' both the \code{space} and \code{prob} paramaters).
-#'
-#' @usage \code{roccgap(n, size, space, occupancy, prob, scale)}
-#' @param n The number of random values to generate
-#' @param size The size parameter for the occupancy-gap distribution (number of balls)
-#' @param space The space parameter for the occupancy-gap distribution (number of bins)
-#' @param occupancy The occupancy parameter for the occupancy-gap distribution (number of occupied bins)
-#' @param prob The probability parameter for the occupancy-gap distribution (probability of ball occupying its bin)
-#' @param scale The scale parameter for the occupancy-gap distribution
-#' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output will be a
-#' vector of random values of length \code{n}
-
+#' @rdname doccgap
 roccgap <- function(n, size, space = NULL, occupancy = size, prob = NULL, scale = NULL) {
 
   #Check scale parameter

@@ -1,28 +1,4 @@
-#' Mass function of the occupancy-gap distribution
-#'
-#' \code{doccgap} returns the probability or log-probability values for the arguments.
-#'
-#' This function computes probabilities or log-probabilities from the mass function of the occupancy-gap
-#' distribution.  The computation method uses a recursive algorithm from the following paper:
-#'
-#' O'Neill, B. (XXXX) An examination of the occupancy-gap distribution.
-#'
-#' Note: The distribution is parameterised by a \code{scale} paramater, but in applied problems in the context
-#' of the extended occupancy problem this parameter is a function of \code{space} and \code{prob} parameters.
-#' The function allows either parameterisation (i.e., the user can either specify the \code{scale} paramater or
-#' both the \code{space} and \code{prob} paramaters).
-#'
-#' @usage \code{doccgap(x, size, space, occupancy, prob, scale, log = FALSE)}
-#' @param x A vector of numeric values to be used as arguments for the mass function
-#' @param size The size parameter for the occupancy-gap distribution (number of balls)
-#' @param space The space parameter for the occupancy-gap distribution (number of bins)
-#' @param occupancy The occupancy parameter for the occupancy-gap distribution (number of occupied bins)
-#' @param prob The probability parameter for the occupancy-gap distribution (probability of ball occupying its bin)
-#' @param scale The scale parameter for the occupancy-gap distribution
-#' @param log A logical value specifying whether results should be returned as log-probabilities
-#' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output
-#' will be a vector of probabilities/log-probabilities corresponding to the vector argument x
-
+#' @rdname doccgap
 doccgap <- function(x, size, space = NULL, occupancy = size, prob = NULL, scale = NULL, log = FALSE) {
 
   #Check scale parameter

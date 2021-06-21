@@ -9,7 +9,6 @@
 #' the bin-counts, effective sample-size, occupancy number, max-count number, and hitting times for each possible
 #' occupancy number.  Each of these objects has a custom printing and plot methods to give user-friendly output.
 #'
-#' @usage \code{sample.ballbin(n, size, space, prob)}
 #' @param n The number of simulations of the process
 #' @param size The size parameter for the occupancy distribution (number of balls)
 #' @param space The space pararmeter for the occupancy distribution (number of bins)
@@ -19,7 +18,13 @@
 #' be a list of class \code{ballbin} containing \code{n} random samples from the process.  If you call \code{summary}
 #' on this object the output will be another list of class \code{summary.ballbin} containing summary statistics
 #' for each random sample from the process.
-
+#' @examples
+#'
+#' d <- sample.ballbin(12, 10, 4, .4)
+#' print(d)
+#' plot(d)
+#' summary(d)
+#' plot(summary(d))
 sample.ballbin <- function(n, size, space, prob, alloc.prob = NULL) {
 
   #Check that argument and parameters are appropriate type
@@ -86,19 +91,20 @@ sample.ballbin <- function(n, size, space, prob, alloc.prob = NULL) {
   #Return output
   OUT }
 
-
-print.ballbin <- function(object) {
+#' @describeIn sample.ballbin prints the sample
+#' @param ... unused
+print.ballbin <- function(x, ...) {
 
   #Check input class
-  if (!('ballbin' %in% class(object)))      stop('Error: This print method is for \'ballbin\' objects')
+  if (!('ballbin' %in% class(x)))      stop('Error: This print method is for \'ballbin\' objects')
 
   #Extract information
-  PARS       <- object$parameters
+  PARS       <- x$parameters
   n          <- PARS$size
   m          <- PARS$space
   prob       <- PARS$prob
   alloc.prob <- PARS$alloc.prob
-  SAMPLE     <- object$sample
+  SAMPLE     <- x$sample
   obs        <- nrow(SAMPLE)
 
   #Print heading
@@ -120,11 +126,12 @@ print.ballbin <- function(object) {
   print(SAMPLE)
   cat('\n')}
 
-
-plot.ballbin <- function(object, ball.size = NULL, ball.color = NULL, ball.colour = ball.color, max.plots = 30) {
+#' @describeIn sample.ballbin plots the sample
+#' @param ball.size,ball.color,ball.colour,max.plots Set the size, color, and number of plots
+plot.ballbin <- function(x, ..., ball.size = NULL, ball.color = NULL, ball.colour = ball.color, max.plots = 30) {
 
   #Check inputs
-  if (!('ballbin' %in% class(object)))            stop('Error: This plot method is for \'ballbin\' objects')
+  if (!('ballbin' %in% class(x)))            stop('Error: This plot method is for \'ballbin\' objects')
   if (!is.null(ball.size)) {
     if (!is.numeric(ball.size))                   stop('Error: ball.size must be a positive number')
     if (length(ball.size) != 1)                   stop('Error: ball.size must be a single positive number')
@@ -141,13 +148,13 @@ plot.ballbin <- function(object, ball.size = NULL, ball.color = NULL, ball.colou
   if (max.plots != MAX.PLOTS)                     stop('Error: max.plots must be a positive integer')
 
   #Extract information
-  PARS       <- object$parameters
+  PARS       <- x$parameters
   n          <- PARS$size
   m          <- PARS$space
   prob       <- PARS$prob
   alloc.prob <- PARS$alloc.prob
-  ALLOC      <- object$allocation
-  SAMPLE     <- object$sample
+  ALLOC      <- x$allocation
+  SAMPLE     <- x$sample
   obs        <- nrow(SAMPLE)
 
   #Limit plot size to 100 plots
@@ -160,8 +167,8 @@ plot.ballbin <- function(object, ball.size = NULL, ball.color = NULL, ball.colou
   #Check installed packages and load them
   GGPLOT2 <- requireNamespace('ggplot2', quietly = TRUE)
   GREXTRA <- requireNamespace('gridExtra', quietly = TRUE)
-  if (GGPLOT2) { library(ggplot2)   } else { stop('Error: Plotting a \'ballbins\' object requires the ggplot2 package') }
-  if (GREXTRA) { library(gridExtra) } else { stop('Error: Plotting a \'ballbins\' object requires the gridExtra package') }
+  if (!GGPLOT2) { stop('Error: Plotting a \'ballbins\' object requires the ggplot2 package') }
+  if (!GREXTRA)  { stop('Error: Plotting a \'ballbins\' object requires the gridExtra package') }
 
   #Generate occupancy indicators
   OCC           <- matrix(FALSE, nrow = obs, ncol = m)
@@ -205,7 +212,7 @@ plot.ballbin <- function(object, ball.size = NULL, ball.color = NULL, ball.colou
   PLOTDATA <- rbind(BALLDATA, BINDATA)
   LABELS <- as.list(rownames(ALLOC))
   names(LABELS) <- 1:obs
-  PLOT <- ggplot2::ggplot(ggplot2::aes(x = Bin, y = Ball, fill = Occ), data = PLOTDATA) +
+  PLOT <- ggplot2::ggplot(ggplot2::aes(x = !!as.symbol("Bin"), y = !!as.symbol("Ball"), fill = !!as.symbol("Occ")), data = PLOTDATA) +
           ggplot2::geom_point(size = BALL.SIZE,   shape = 21, data = BALLDATA) +
           ggplot2::geom_point(size = BALL.SIZE+2, shape = 22, data = BINDATA) +
           ggplot2::scale_x_continuous(labels = 1:m, breaks = 1:m) +
@@ -223,15 +230,15 @@ plot.ballbin <- function(object, ball.size = NULL, ball.color = NULL, ball.colou
                          axis.ticks.y  = ggplot2::element_blank(),
                          panel.grid.major.y = ggplot2::element_blank(),
                          panel.grid.minor.y = ggplot2::element_blank(),
-                         panel.spacing = unit(1, 'lines')) +
+                         panel.spacing = ggplot2::unit(1, 'lines')) +
           ggplot2::ggtitle('Balls-in-Bins Sample Plots') +
           ggplot2::labs(subtitle = SUBTITLE)
 
   #Print the plot
   plot(PLOT) }
 
-
-summary.ballbin <- function(object) {
+#' @describeIn sample.ballbin summarizes the sample
+summary.ballbin <- function(object, ...) {
 
   #Check input class
   if (!('ballbin' %in% class(object)))      stop('Error: This summary method is for \'ballbin\' objects')
@@ -291,23 +298,23 @@ summary.ballbin <- function(object) {
   #Return output
   OUT }
 
-
-print.summary.ballbin <- function(object) {
+#' @describeIn sample.ballbin prints the summary
+print.summary.ballbin <- function(x, ...) {
 
   #Check input class
-  if (!('summary.ballbin' %in% class(object)))      stop('Error: This print method is for \'summary.ballbin\' objects')
+  if (!('summary.ballbin' %in% class(x)))      stop('Error: This print method is for \'summary.ballbin\' objects')
 
   #Extract information
-  PARS       <- object$parameters
+  PARS       <- x$parameters
   n          <- PARS$size
   m          <- PARS$space
   prob       <- PARS$prob
   alloc.prob <- PARS$alloc.prob
-  COUNTS     <- object$counts
-  EFF.SIZE   <- as.matrix(object$eff.size,  ncol = 1, drop = FALSE)
-  OCCUPANCY  <- as.matrix(object$occupancy, ncol = 1, drop = FALSE)
-  MAXCOUNT   <- as.matrix(object$max.count, ncol = 1, drop = FALSE)
-  HITTING    <- object$excess.hitting
+  COUNTS     <- x$counts
+  EFF.SIZE   <- as.matrix(x$eff.size,  ncol = 1, drop = FALSE)
+  OCCUPANCY  <- as.matrix(x$occupancy, ncol = 1, drop = FALSE)
+  MAXCOUNT   <- as.matrix(x$max.count, ncol = 1, drop = FALSE)
+  HITTING    <- x$excess.hitting
   colnames(EFF.SIZE)  <- 'Eff.Size'
   colnames(OCCUPANCY) <- 'Occupancy'
   colnames(MAXCOUNT)  <- 'MaxCount'
@@ -355,11 +362,13 @@ print.summary.ballbin <- function(object) {
   if (sum(is.na(HITTING)) > 0) {
     cat('(Values ending in + are right-censored values.) \n \n') } }
 
-
-plot.summary.ballbin <- function(object, bar.color = NULL, bar.colour = bar.color) {
+#' @describeIn sample.ballbin plots the summary
+#' @param x,object ballbin objects (for generics)
+#' @param bar.color,bar.colour plotting arguments
+plot.summary.ballbin <- function(x, ..., bar.color = NULL, bar.colour = bar.color) {
 
   #Check inputs
-  if (!('summary.ballbin' %in% class(object)))              stop('Error: This plot method is for \'summary.ballbin\' objects')
+  if (!('summary.ballbin' %in% class(x)))              stop('Error: This plot method is for \'summary.ballbin\' objects')
   if ((!missing(bar.color))&(!missing(bar.colour))) {
     stop('Error: Specify bar.color or bar.colour but not both') }
   if (!is.null(bar.colour)) {
@@ -368,16 +377,16 @@ plot.summary.ballbin <- function(object, bar.color = NULL, bar.colour = bar.colo
     if (!(bar.colour %in% colours()))                       stop('Error: bar.color must be in \'colours()\'') }
 
   #Extract information
-  PARS       <- object$parameters
+  PARS       <- x$parameters
   n          <- PARS$size
   m          <- PARS$space
   prob       <- PARS$prob
   alloc.prob <- PARS$alloc.prob
-  COUNTS     <- object$counts
-  EFF.SIZE   <- as.matrix(object$eff.size,  ncol = 1, drop = FALSE)
-  OCCUPANCY  <- as.matrix(object$occupancy, ncol = 1, drop = FALSE)
-  MAXCOUNT   <- as.matrix(object$max.count, ncol = 1, drop = FALSE)
-  HITTING    <- object$excess.hitting
+  COUNTS     <- x$counts
+  EFF.SIZE   <- as.matrix(x$eff.size,  ncol = 1, drop = FALSE)
+  OCCUPANCY  <- as.matrix(x$occupancy, ncol = 1, drop = FALSE)
+  MAXCOUNT   <- as.matrix(x$max.count, ncol = 1, drop = FALSE)
+  HITTING    <- x$excess.hitting
   colnames(EFF.SIZE)  <- 'Eff.Size'
   colnames(OCCUPANCY) <- 'Occupancy'
   colnames(MAXCOUNT)  <- 'MaxCount'
@@ -386,8 +395,8 @@ plot.summary.ballbin <- function(object, bar.color = NULL, bar.colour = bar.colo
   #Check installed packages and load them
   GGPLOT2 <- requireNamespace('ggplot2', quietly = TRUE)
   GREXTRA <- requireNamespace('gridExtra', quietly = TRUE)
-  if (GGPLOT2) { library(ggplot2)   } else { stop('Error: Plotting a \'summary.ballbins\' object requires the ggplot2 package') }
-  if (GREXTRA) { library(gridExtra) } else { stop('Error: Plotting a \'summary.ballbins\' object requires the gridExtra package') }
+  if (!GGPLOT2) { stop('Error: Plotting a \'summary.ballbins\' object requires the ggplot2 package') }
+  if (!GREXTRA) { stop('Error: Plotting a \'summary.ballbins\' object requires the gridExtra package') }
 
   #Create plot data
   PLOTDATA <- data.frame(Occupancy = 0:min(n,m), Probability = 0)
@@ -400,7 +409,7 @@ plot.summary.ballbin <- function(object, bar.color = NULL, bar.colour = bar.colo
 
   #Create the empirical occupancy plot
   if (!is.null(bar.colour)) { BAR.COLOUR <- bar.colour } else { BAR.COLOUR <- 'blue' }
-  PLOT <- ggplot2::ggplot(ggplot2::aes(x = Occupancy, y = Probability), data = PLOTDATA) +
+  PLOT <- ggplot2::ggplot(ggplot2::aes(x = !!as.symbol("Occupancy"), y = !!as.symbol("Probability")), data = PLOTDATA) +
           ggplot2::geom_bar(stat = 'identity', fill = BAR.COLOUR) +
           ggplot2::scale_x_continuous(labels = 0:m, breaks = 0:m) +
           ggplot2::theme(plot.title    = ggplot2::element_text(hjust = 0.5, size = 14, face = 'bold'),

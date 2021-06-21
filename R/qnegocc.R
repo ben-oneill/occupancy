@@ -1,26 +1,4 @@
-#' Quantile function of the negative occupancy distribution
-#'
-#' \code{qnegocc} returns the quantile function for the distribution.
-#'
-#' This function computes values from the quantile function of the negative occupancy distribution.  The computation
-#' method uses a recursive algorithm to compute the cumulative probabilities and then converts this to quantiles using
-#' the probabilities/log-probabilities in the input argument.  The recursive method is from the following paper:
-#' in the following paper:
-#'
-#' O'Neill, B. (2021) An examination of the negative-occupancy distribution and the coupon-collector distribution.
-#'
-#' @usage \code{qnegocc(p, space, occupancy, prob, approx = FALSE, log.p = FALSE, lower.tail = TRUE)}
-#' @param p A vector of numeric probability/log-probability values to be used as arguments for the quantile function
-#' @param space The space parameter for the negative occupancy distribution (number of bins)
-#' @param occupancy The occupancy parameter for the negative occupancy distribution (number of occupied bins)
-#' @param prob The probability parameter for the negative occupancy distribution (probability of ball occupying its bin)
-#' @param approx A logical value specifying whether to use an approximation for the distribution
-#' @param log.p A logical value specifying whether input arguments are log-probabilities
-#' @param lower.tail A logical value specifying whether probabilities are from the cumulative distribution function
-#' or the corresponding survival function
-#' @return If all inputs are correctly specified (i.e., parameters are in allowable range and arguments are integers)
-#' then the output will be a vector of probabilities/log-probabilities corresponding to the vector argument p
-
+#' @rdname dnegocc
 qnegocc <- function(p, space, occupancy, prob = 1, approx = FALSE, log.p = FALSE, lower.tail = TRUE) {
 
   #Check that argument and parameters are appropriate type
@@ -62,12 +40,12 @@ qnegocc <- function(p, space, occupancy, prob = 1, approx = FALSE, log.p = FALSE
   if (k == 0) {
     QUANTILES <- rep(0, length(p))
     return(QUANTILES) }
-  
+
   #Compute log-probabilities for input p
   #Adjust for floating point error in computation log(exp(...))
-  MAX.FP.ERROR <- 1.1102230246251565404236316680908203125e-16
+  MAX.FP.ERROR <- .Machine$double.eps
   if (log.p) { LOGPROBS <- p } else { LOGPROBS <- log(p) - MAX.FP.ERROR }
-  
+
   #Set maximum log-probability for quantiles
   #We exclude input probabilities of one, since quantiles for these are computed manually
   MAX.LOGP <- -Inf

@@ -1,27 +1,40 @@
-#' Mass function of the occupancy-gap distribution
+#' The Occupancy-Gap Distribution
 #'
-#' \code{doccgap.all} returns array of probability or log-probability values up to a maximum argument.
+#' Density, distribution function, quantile function and random generation
+#' for the Occupancy-Gap Distribution with size and scale parameters (see note).
+#'
+#' \code{docc.all} returns the entire PMF.
 #'
 #' This function computes probabilities or log-probabilities from the mass function of the occupancy-gap
 #' distribution.  The computation method uses a recursive algorithm from the following paper:
 #'
-#' O'Neill, B. (XXXX) An examination of the occupancy-gap distribution.
+#' @section References:
 #'
-#' Note: The distribution is parameterised by a \code{scale} paramater, but in applied problems in the context
+#' O'Neill, B. (forthcoming) An examination of the occupancy-gap distribution.
+#'
+#'
+#' @section Note:
+#'
+#' The distribution is parameterised by a \code{scale} parameter, but in applied problems in the context
 #' of the extended occupancy problem this parameter is a function of \code{space} and \code{prob} parameters.
 #' The function allows either parameterisation (i.e., the user can either specify the \code{scale} paramater or
-#' both the \code{space} and \code{prob} paramaters).
+#' both the \code{space} and \code{prob} parameters).
 #'
-#' @usage \code{doccgap.all(size, space, max.occupancy, prob, scale, log = FALSE)}
+#' @inheritParams .inheritparams
+#'
 #' @param size The size parameter for the occupancy-gap distribution (number of balls)
 #' @param space The space parameter for the occupancy-gap distribution (number of bins)
-#' @param max.occupancy The maximum occupancy parameter for the occupancy-gap distribution (number of occupied bins)
+#' @param max.occupancy,occupancy The maximum occupancy parameter for the occupancy-gap distribution (number of occupied bins)
 #' @param prob The probability parameter for the occupancy-gap distribution (probability of ball occupying its bin)
 #' @param scale The scale parameter for the occupancy-gap distribution
-#' @param log A logical value specifying whether results should be returned as log-probabilities
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output
 #' will be a matrix of probabilities/log-probabilities
-
+#' @rdname doccgap
+#' @examples
+#' x <- roccgap(10, 20, 2, 2, .5)
+#' p <- poccgap(x, 20, 2, 2, .5)
+#' stopifnot(x == qoccgap(p, 20, 2, 2, .5))
+#' doccgap.all(20, 2, 2, .5)
 doccgap.all <- function(size, space = NULL, max.occupancy = size, prob = NULL, scale = NULL, log = FALSE) {
 
   #Check scale parameter

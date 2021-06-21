@@ -3,18 +3,9 @@
 \docType{package}
 \name{occupancy}
 \alias{occupancy}
-\alias{occupancy-package}
 \title{occupancy: A package for computing with occupancy distributions.}
 \description{
 The occupancy package provides standard mass functions, distribution functions, quantile functions
 and random generation for various distributions.  These distributions occur in cases where balls are
 randomly allocated to bins.
 }
-\section{occupancy functions}{
-
-\code{docc}
-\code{pocc}
-\code{qocc}
-\code{rocc}
-}
-

@@ -1,25 +1,31 @@
-#' Mass function of the extended occupancy distribution
+#' The Extended Occupancy Distribution
 #'
-#' \code{docc.all} returns the probability or log-probability values for the arguments.
+#' Density, distribution function, quantile function and random generation
+#' for the extended occupancy distribution with size and shape parameters.
 #'
-#' This function computes probabilities or log-probabilities from the mass function of the extended occupancy
-#' distribution.  Further details on the distribution can be found in the following paper:
+#' \code{docc.all} returns the entire PMF.
+#'
+#' @section References:
 #'
 #' O'Neill, B. (2021) Three distributions in the extended occupancy problem.
 #'
-#' @usage \code{docc.all(max.size, space, prob, approx = FALSE, log = FALSE)}
-#' @param max.size The maximum size parameter for the occupancy distribution (number of balls)
-#' @param space The space pararmeter for the occupancy distribution (number of bins)
+#' @inheritParams .inheritparams
+#'
+#' @param max.size,size The maximum size parameter for the occupancy distribution (number of balls)
+#' @param space The space parameter for the occupancy distribution (number of bins)
 #' @param prob The probability parameter for the occupancy distribution (probability of ball occupying its bin)
 #' @param approx A logical value specifying whether to use the normal approximation to the occupancy distribution
-#' @param log A logical value specifying whether results should be returned as log-probabilities
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range and arguments are integers)
 #' then the output will be a vector of probabilities/log-probabilities corresponding to the vector argument x
-
+#' @rdname docc
+#' @examples
+#' x <- rocc(10, 2, 2)
+#' p <- pocc(x, 2, 2)
+#' stopifnot(x == qocc(p, 2, 2))
+#' docc.all(2,2)
 docc.all <- function(max.size, space, prob = 1, approx = FALSE, log = FALSE) {
 
   #Check that argument and parameters are appropriate type
-  if (!is.numeric(max.x))                   stop('Error: Argument max.x is not numeric')
   if (!is.numeric(max.size))                stop('Error: Maximum size parameter is not numeric')
   if (!is.numeric(space))                   stop('Error: Space parameter is not numeric')
   if (!is.numeric(prob))                    stop('Error: Probability parameter is not numeric')
@@ -39,7 +45,7 @@ docc.all <- function(max.size, space, prob = 1, approx = FALSE, log = FALSE) {
   MAX <- min(n,m)
 
   #Check that parameters are in allowable range
-  if (size != n)                            stop('Error: Maximum size parameter is not an integer')
+  if (max.size != n)                        stop('Error: Maximum size parameter is not an integer')
   if (n < 0)                                stop('Error: Maximum size parameter must be non-negative')
   if (space != m)                           stop('Error: Space parameter is not an integer')
   if (m <= 0)                               stop('Error: Space parameter must be positive')
@@ -93,7 +99,7 @@ docc.all <- function(max.size, space, prob = 1, approx = FALSE, log = FALSE) {
     #Generate the log-probabilities for the occupancy distribution
     for (nn in 1:n) {
     for (kk in 0:min(nn, m)) {
-      OCC[k+1, nn+1] <- nn*log(prob) - nn*log(m) + lchoose(m,kk) + lfactorial(kk) + LOGSTIRLING[nn+1, kk+1] }
+      OCC[kk+1, nn+1] <- nn*log(prob) - nn*log(m) + lchoose(m,kk) + lfactorial(kk) + LOGSTIRLING[nn+1, kk+1] }
       OCC[, nn+1] <- OCC[, nn+1] - matrixStats::logSumExp(OCC[, nn+1]) } }
 
   if (approx) {

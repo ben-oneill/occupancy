@@ -1,22 +1,4 @@
-#' Mass function of the negative occupancy distribution
-#'
-#' \code{dnegocc} returns the probability or log-probability values for the arguments.
-#'
-#' This function computes probabilities or log-probabilities from the mass function of the negative occupancy
-#' distribution.  The computation method uses a recursive algorithm from the following paper:
-#'
-#' O'Neill, B. (2021) An examination of the negative-occupancy distribution and the coupon-collector distribution.
-#'
-#' @usage \code{dnegocc(x, space, occupancy, prob, approx = FALSE, log = FALSE)}
-#' @param x A vector of numeric values to be used as arguments for the mass function
-#' @param space The space parameter for the negative occupancy distribution (number of bins)
-#' @param occupancy The occupancy parameter for the negative occupancy distribution (number of occupied bins)
-#' @param prob The probability parameter for the negative occupancy distribution (probability of ball occupying its bin)
-#' @param approx A logical value specifying whether to use an approximation for the distribution
-#' @param log A logical value specifying whether results should be returned as log-probabilities
-#' @return If all inputs are correctly specified (i.e., parameters are in allowable range and arguments are integers)
-#' then the output will be a vector of probabilities/log-probabilities corresponding to the vector argument x
-
+#' @rdname dnegocc
 dnegocc <- function(x, space, occupancy, prob = 1, approx = FALSE, log = FALSE) {
 
   #Check that argument and parameters are appropriate type

@@ -1,11 +1,16 @@
-#' Probabilty mass function of the maximum-count distribution
+#' The Maximum-Count Occupancy Distribution
 #'
-#' \code{dmaxcount.all} returns a matrix of probability or log-probability values up to a maximum arguments.
+#' Density, distribution function, quantile function and random generation for
+#' the maximum count occupancy distribution with size and shape parameters.
+#'
+#' \code{dmaxcount.all} returns the entire PMF.
 #'
 #' This function computes probabilities or log-probabilities from the probability mass function of the maximum-count
 #' distribution, which is the distribution for the maximum of the counts for the number of balls in a bin in the extended
 #' occupancy problem.  Details of the algorithm in the classical case can be found in the papers below.  The extension
 #' to include the probability parameter is done using the binomial mixture representation of the extended occupancy problem.
+#'
+#' @section References:
 #'
 #' Bonetti, M., Corillo, P. and Ogay, A. (2019) Computing the exact distributions of some functions of the ordered multinomial
 #' counts: maximum, minimum, range and sums of order statistics.
@@ -13,15 +18,20 @@
 #' Rappeport, M,A. (1968) Algorithms and computational procedures for the application of order statistics to queuing
 #' problems. PhD thesis, New York University.
 #'
-#' @usage \code{dmaxcount.all(max.x, max.size, space, prob, log = FALSE)}
+#' @inheritParams .inheritparams
+#'
 #' @param max.x A vector of numeric values to be used as arguments for the probability mass function
-#' @param max.size The maximum size parameter for the maximum-count distribution (number of balls)
+#' @param max.size,size The maximum size parameter for the maximum-count distribution (number of balls)
 #' @param space The space parameter for the maximum-count distribution (number of bins)
 #' @param prob The probability parameter for the occupancy distribution (probability of ball occupying its bin)
-#' @param log A logical value specifying whether results should be returned as log-probabilities
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output will be a
 #' vector of probabilities/log-probabilities up to the maximum argument values
-
+#' @rdname dmaxcount
+#' @examples
+#' x <- rmaxcount(10, 2, 2)
+#' p <- pmaxcount(x, 2, 2)
+#' stopifnot(x == qmaxcount(p, 2, 2))
+#' dmaxcount.all(2,2,2)
 dmaxcount.all <- function(max.x, max.size, space, prob = 1, log = FALSE) {
 
   #Check that argument and parameters are appropriate type
@@ -43,7 +53,7 @@ dmaxcount.all <- function(max.x, max.size, space, prob = 1, log = FALSE) {
   if (space == Inf) { m <- Inf } else { m <- as.integer(space) }
 
   #Check that parameters are in allowable range
-  if (size != n)                            stop('Error: Size parameter is not an integer')
+  if (max.size != n)                        stop('Error: Size parameter is not an integer')
   if (n < 0)                                stop('Error: Size parameter should be nonnegative')
   if (space != m)                           stop('Error: Space parameter is not an integer')
   if (m <= 0)                               stop('Error: Space parameter should be positive')
@@ -77,7 +87,7 @@ dmaxcount.all <- function(max.x, max.size, space, prob = 1, log = FALSE) {
       P1 <- VGAM::log1mexp(-P0)
       MAXCOUNT[1, nn+1] <- P0
       if (MAX > 0) { MAXCOUNT[2, nn+1] <- P1 } }
-    if (log) { return(OUT) } else { return(exp(OUT)) } }
+    if (log) { return(MAX) } else { return(exp(MAX)) } }
 
   #Deal with non-trivial case where m < Inf
   #Create matrix of log-probabilities

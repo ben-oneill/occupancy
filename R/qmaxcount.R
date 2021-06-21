@@ -1,29 +1,4 @@
-#' Quantile function of the maximum-count distribution
-#'
-#' \code{qmaxcount} returns the quantiles for the arguments.
-#'
-#' This function computes quantiles of the maximum-count distribution, which is the distribution for the maximum of
-#' the counts for the number of balls in a bin in the extended occupancy problem.  Details of the algorithm in the
-#' classical case can be found in the papers below.  The extension to include the probability parameter is done using
-#' the binomial mixture representation of the extended occupancy problem.
-#'
-#' Bonetti, M. and Corillo, P. (2019) Computing the exact distributions of some functions of the ordered multinomial
-#' counts: maximum, minimum, range and sums of order statistics.
-#'
-#' Rappeport, M,A. (1968) Algorithms and computational procedures for the application of order statistics to queuing
-#' problems. PhD thesis, New York University.
-#'
-#' @usage \code{qmaxcount(p, size, space, prob, log.p = FALSE, lower.tail = TRUE)}
-#' @param p A vector of numeric values to be used as arguments for the quantile function
-#' @param size The size parameter for the maximum-count distribution (number of balls)
-#' @param space The space parameter for the maximum-count distribution (number of bins)
-#' @param prob The probability parameter for the occupancy distribution (probability of ball occupying its bin)
-#' @param log.p A logical value specifying whether the input \code{p} consists of log-probabilities
-#' @param lower.tail A logical value specifying whether results are from the cumulative distribution function
-#' or the corresponding survival function
-#' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output will be a
-#' vector of quantiles corresponding to the vector argument p
-
+#' @rdname dmaxcount
 qmaxcount <- function(p, size, space, prob = 1, log.p = FALSE, lower.tail = TRUE) {
 
   #Check that argument and parameters are appropriate type
@@ -65,7 +40,7 @@ qmaxcount <- function(p, size, space, prob = 1, log.p = FALSE, lower.tail = TRUE
 
   #Deal with the trivial case where n = 0
   if (n == 0) {
-    QUANTILE <- rep(0, length(x))
+    QUANTILE <- rep(0, length(p))
     return(QUANTILE) }
 
   #Create matrix of log-probabilities
