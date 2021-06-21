@@ -112,9 +112,10 @@ qmaxcount <- function(p, size, space, prob = 1, log.p = FALSE, lower.tail = TRUE
   RR <- length(p)
   QUANTILE <- rep(NA, RR)
   for (i in 1:RR) {
+    logp <- LOGP[i]
     Q <- 0
     L <- LOGPROBS[Q+1]
-    while (LOGP[i] > L) {
+    while (logp > L) {
       Q <- Q+1
       L <- LOGPROBS[Q+1] }
     QUANTILE[i] <- Q }
