@@ -100,11 +100,13 @@ qmaxcount <- function(p, size, space, prob = 1, log.p = FALSE, lower.tail = TRUE
       for (xx in 0:n) {
         LOGPROBS[xx+1] <- matrixStats::logSumExp(LLL[xx+1, , m] + LOGBINDIST) } }
 
-  #Obtain log-probabilities for quantiles
+  #Compute log-probabilities for input p
+  #Adjust for floating point error in computation log(exp(...))
+  MAX.FP.ERROR <- .Machine$double.eps
   if (lower.tail) {
-    if (log.p) { LOGP <- p } else { LOGP <- log(p) } }
+    if (log.p) { LOGP <- p } else { LOGP <- log(p) - MAX.FP.ERROR } }
   if (!lower.tail) {
-    if (log.p) { LOGP <- VGAM::log1mexp(-p) } else { LOGP <- log(1-p) } }
+    if (log.p) { LOGP <- VGAM::log1mexp(-p) } else { LOGP <- log(1-p) - MAX.FP.ERROR } }
 
   #Compute quantiles
   RR <- length(p)
