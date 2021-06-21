@@ -80,6 +80,6 @@ O'Neill, B. (2021) An examination of the negative-occupancy distribution and the
 \examples{
 x <- rnegocc(10, 2, 2)
 p <- pnegocc(x, 2, 2)
-#stopifnot(x == qnegocc(p, 2, 2))
+stopifnot(x == qnegocc(p, 2, 2))
 dnegocc.all(5,2,2)
 }

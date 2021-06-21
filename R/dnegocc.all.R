@@ -24,7 +24,7 @@
 #' @examples
 #' x <- rnegocc(10, 2, 2)
 #' p <- pnegocc(x, 2, 2)
-#' #stopifnot(x == qnegocc(p, 2, 2))
+#' stopifnot(x == qnegocc(p, 2, 2))
 #' dnegocc.all(5,2,2)
 dnegocc.all <- function(max.x, space, max.occupancy, prob = 1, approx = FALSE, log = FALSE) {
 

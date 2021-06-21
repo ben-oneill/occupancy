@@ -40,12 +40,12 @@ qnegocc <- function(p, space, occupancy, prob = 1, approx = FALSE, log.p = FALSE
   if (k == 0) {
     QUANTILES <- rep(0, length(p))
     return(QUANTILES) }
-  
+
   #Compute log-probabilities for input p
   #Adjust for floating point error in computation log(exp(...))
-  MAX.FP.ERROR <- 1.1102230246251565404236316680908203125e-16
+  MAX.FP.ERROR <- .Machine$double.eps
   if (log.p) { LOGPROBS <- p } else { LOGPROBS <- log(p) - MAX.FP.ERROR }
-  
+
   #Set maximum log-probability for quantiles
   #We exclude input probabilities of one, since quantiles for these are computed manually
   MAX.LOGP <- -Inf
