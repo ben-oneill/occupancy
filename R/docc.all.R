@@ -11,7 +11,8 @@
 #'
 #' @inheritParams .inheritparams
 #'
-#' @param max.size,size The maximum size parameter for the occupancy distribution (number of balls)
+#' @param size The size parameter for the occupancy distribution (number of balls)
+#' @param max.size The maximum size parameter for the occupancy distribution (number of balls)
 #' @param space The space parameter for the occupancy distribution (number of bins)
 #' @param prob The probability parameter for the occupancy distribution (probability of ball occupying its bin)
 #' @param approx A logical value specifying whether to use the normal approximation to the occupancy distribution

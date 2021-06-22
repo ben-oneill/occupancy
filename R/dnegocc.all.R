@@ -15,7 +15,8 @@
 #'
 #' @param max.x A vector of numeric values to be used as arguments for the mass function
 #' @param space The space parameter for the negative occupancy distribution (number of bins)
-#' @param max.occupancy,occupancy The maximum occupancy parameter for the negative occupancy distribution (number of occupied bins)
+#' @param occupancy The occupancy parameter for the negative occupancy distribution (number of occupied bins)
+#' @param max.occupancy The maximum occupancy parameter for the negative occupancy distribution (number of occupied bins)
 #' @param prob The probability parameter for the negative occupancy distribution (probability of ball occupying its bin)
 #' @param approx A logical value specifying whether to use an approximation for the distribution
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range and arguments are integers)
@@ -24,7 +25,7 @@
 #' @examples
 #' x <- rnegocc(10, 2, 2)
 #' p <- pnegocc(x, 2, 2)
-#' stopifnot(x == qnegocc(p, 2, 2))
+#' qnegocc(0:9/10, 2, 2)
 #' dnegocc.all(5,2,2)
 dnegocc.all <- function(max.x, space, max.occupancy, prob = 1, approx = FALSE, log = FALSE) {
 

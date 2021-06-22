@@ -22,6 +22,8 @@ rmaxcount(n, size, space, prob = 1)
 \arguments{
 \item{x}{vector of quantiles.}
 
+\item{size}{The size parameter for the maximum-count distribution (number of balls)}
+
 \item{space}{The space parameter for the maximum-count distribution (number of bins)}
 
 \item{prob}{The probability parameter for the occupancy distribution (probability of ball occupying its bin)}
@@ -30,7 +32,7 @@ rmaxcount(n, size, space, prob = 1)
 
 \item{max.x}{A vector of numeric values to be used as arguments for the probability mass function}
 
-\item{max.size, size}{The maximum size parameter for the maximum-count distribution (number of balls)}
+\item{max.size}{The maximum size parameter for the maximum-count distribution (number of balls)}
 
 \item{q}{vector of quantiles.}
 

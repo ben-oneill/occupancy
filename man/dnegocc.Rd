@@ -40,6 +40,8 @@ rnegocc(n, space, occupancy, prob = 1)
 
 \item{space}{The space parameter for the negative occupancy distribution (number of bins)}
 
+\item{occupancy}{The occupancy parameter for the negative occupancy distribution (number of occupied bins)}
+
 \item{prob}{The probability parameter for the negative occupancy distribution (probability of ball occupying its bin)}
 
 \item{approx}{A logical value specifying whether to use an approximation for the distribution}
@@ -48,7 +50,7 @@ rnegocc(n, space, occupancy, prob = 1)
 
 \item{max.x}{A vector of numeric values to be used as arguments for the mass function}
 
-\item{max.occupancy, occupancy}{The maximum occupancy parameter for the negative occupancy distribution (number of occupied bins)}
+\item{max.occupancy}{The maximum occupancy parameter for the negative occupancy distribution (number of occupied bins)}
 
 \item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
 
@@ -80,6 +82,6 @@ O'Neill, B. (2021) An examination of the negative-occupancy distribution and the
 \examples{
 x <- rnegocc(10, 2, 2)
 p <- pnegocc(x, 2, 2)
-stopifnot(x == qnegocc(p, 2, 2))
+qnegocc(0:9/10, 2, 2)
 dnegocc.all(5,2,2)
 }

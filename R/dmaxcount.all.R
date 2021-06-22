@@ -21,7 +21,8 @@
 #' @inheritParams .inheritparams
 #'
 #' @param max.x A vector of numeric values to be used as arguments for the probability mass function
-#' @param max.size,size The maximum size parameter for the maximum-count distribution (number of balls)
+#' @param max.size The maximum size parameter for the maximum-count distribution (number of balls)
+#' @param size The size parameter for the maximum-count distribution (number of balls)
 #' @param space The space parameter for the maximum-count distribution (number of bins)
 #' @param prob The probability parameter for the occupancy distribution (probability of ball occupying its bin)
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output will be a
