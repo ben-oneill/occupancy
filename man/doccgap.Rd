@@ -71,7 +71,7 @@ roccgap(n, size, space = NULL, occupancy = size, prob = NULL, scale = NULL)
 
 \item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
 
-\item{lower.tail}{logical; if TRUE (default), probabilities are \eqn{P[X ≤ x]} otherwise, \eqn{P[X > x]}.}
+\item{lower.tail}{logical; if TRUE (default), probabilities are \eqn{P[X \le x]} otherwise, \eqn{P[X > x]}.}
 
 \item{p}{vector of probabilities.}
 

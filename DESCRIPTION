@@ -1,8 +1,8 @@
 Package: occupancy
 Type: Package
 Title: Probability Functions for Occupancy Distributions
-Version: 1.0
-Date: 09 June 2021
+Version: 1.1
+Date: 2021-06-22
 Authors@R: person("Ben", "O'Neill", email = "ben.oneill@hotmail.com",
   role = c("aut", "cre"))
 Maintainer: Ben O'Neill <ben.oneill@hotmail.com>
