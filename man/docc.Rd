@@ -38,6 +38,8 @@ rocc(n, size, space, prob = 1)
 \arguments{
 \item{x}{vector of quantiles.}
 
+\item{size}{The size parameter for the occupancy distribution (number of balls)}
+
 \item{space}{The space parameter for the occupancy distribution (number of bins)}
 
 \item{prob}{The probability parameter for the occupancy distribution (probability of ball occupying its bin)}
@@ -46,7 +48,7 @@ rocc(n, size, space, prob = 1)
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
 
-\item{max.size, size}{The maximum size parameter for the occupancy distribution (number of balls)}
+\item{max.size}{The maximum size parameter for the occupancy distribution (number of balls)}
 
 \item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
 

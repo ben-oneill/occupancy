@@ -24,7 +24,8 @@
 #'
 #' @param size The size parameter for the occupancy-gap distribution (number of balls)
 #' @param space The space parameter for the occupancy-gap distribution (number of bins)
-#' @param max.occupancy,occupancy The maximum occupancy parameter for the occupancy-gap distribution (number of occupied bins)
+#' @param occupancy The occupancy parameter for the occupancy-gap distribution (number of occupied bins)
+#' @param max.occupancy The maximum occupancy parameter for the occupancy-gap distribution (number of occupied bins)
 #' @param prob The probability parameter for the occupancy-gap distribution (probability of ball occupying its bin)
 #' @param scale The scale parameter for the occupancy-gap distribution
 #' @return If all inputs are correctly specified (i.e., parameters are in allowable range) then the output

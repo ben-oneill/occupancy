@@ -59,13 +59,15 @@ roccgap(n, size, space = NULL, occupancy = size, prob = NULL, scale = NULL)
 
 \item{space}{The space parameter for the occupancy-gap distribution (number of bins)}
 
+\item{occupancy}{The occupancy parameter for the occupancy-gap distribution (number of occupied bins)}
+
 \item{prob}{The probability parameter for the occupancy-gap distribution (probability of ball occupying its bin)}
 
 \item{scale}{The scale parameter for the occupancy-gap distribution}
 
 \item{log}{logical; if TRUE, probabilities p are given as log(p).}
 
-\item{max.occupancy, occupancy}{The maximum occupancy parameter for the occupancy-gap distribution (number of occupied bins)}
+\item{max.occupancy}{The maximum occupancy parameter for the occupancy-gap distribution (number of occupied bins)}
 
 \item{log.p}{logical; if TRUE, probabilities p are given as log(p).}
 
