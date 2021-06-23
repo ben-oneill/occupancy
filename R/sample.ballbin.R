@@ -234,8 +234,7 @@ plot.ballbin <- function(x, ..., ball.size = NULL, ball.color = NULL, ball.colou
           ggplot2::ggtitle('Balls-in-Bins Sample Plots') +
           ggplot2::labs(subtitle = SUBTITLE)
 
-  #Print the plot
-  plot(PLOT) }
+  PLOT }
 
 #' @describeIn sample.ballbin summarizes the sample
 summary.ballbin <- function(object, ...) {
@@ -420,6 +419,6 @@ plot.summary.ballbin <- function(x, ..., bar.color = NULL, bar.colour = bar.colo
           ggplot2::ggtitle('Empirical Occupancy Distribution') +
           ggplot2::labs(subtitle = SUBTITLE)
 
-  #Print the plot
-  plot(PLOT) }
+  #Return the plot
+  PLOT }
 
